@@ -2,16 +2,13 @@ package Game.Player;
 
 import Game.utils.Direction;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Human implements Player {
     @Override
     public void placeBoats() {
         defenseGrid.displayGrid();
-        System.out.println("You have 5 boats to place: 1 Carrier, 1 Battleship, 1 Cruiser, 1 Submarine and 1 Destroyer.");
+        System.out.println("\nYou have 5 boats to place: 1 Carrier, 1 Battleship, 1 Cruiser, 1 Submarine and 1 Destroyer.");
         System.out.println("To place a boat, you have to write a square where to place the stern of the boat and a direction for the boat.");
         System.out.println("Format example: B,6,EAST");
         System.out.println("Where do you want to place your Carrier (size="+carrier.getSize()+") ?");

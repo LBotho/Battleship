@@ -13,7 +13,13 @@ public class Game {
     }
 
     public void init () {
+        System.out.println("##################################################");
+        System.out.println("#            PLAYER 1 BOATS PLACEMENT            #");
+        System.out.println("##################################################\n");
         player1.placeBoats();
+        System.out.println("##################################################");
+        System.out.println("#            PLAYER 2 BOATS PLACEMENT            #");
+        System.out.println("##################################################\n");
         //player2.placeBoats();
     }
 }

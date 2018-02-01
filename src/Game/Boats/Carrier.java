@@ -2,8 +2,8 @@ package Game.Boats;
 
 public class Carrier extends Boat {
     public Carrier() {
-        size = 5;
-        range = 2;
+        setSize(5);
+        setRange(2);
     }
 
     @Override
