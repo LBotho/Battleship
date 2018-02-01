@@ -11,10 +11,12 @@ public class Main {
     }
 
     private static Boolean player2Choice () {
-        Scanner reader = new Scanner(System.in);
+        //Scanner reader = new Scanner(System.in);
         Boolean player2Human = false;
         System.out.println("You want to play against a human player or a computer ? (human/computer)");
-        String str = reader.nextLine();
+        //String str = reader.nextLine();
+        String str = "human";
+
         if (str.equals("human")) {
             player2Human = true;
         } else if (str.equals("computer")) {

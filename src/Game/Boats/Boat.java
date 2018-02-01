@@ -4,12 +4,13 @@ import Game.utils.Direction;
 
 import java.util.Map;
 
-abstract class Boat {
+abstract public class Boat {
     private Map<Integer,Integer> position;
     private Direction direction;
     private int size;
     private int range;
     private int health = 2;
+    private String name;
 
 
     abstract void move();
@@ -32,4 +33,7 @@ abstract class Boat {
 
     public int getHealth() { return health; }
     public void setHealth(int health) { this.health = health; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 }
