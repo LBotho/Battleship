@@ -11,4 +11,9 @@ public class Game {
         player1 = new Human();
         if (player2Human) player2 = new Human(); else player2 = new Computer();
     }
+
+    public void init () {
+        player1.placeBoats();
+        //player2.placeBoats();
+    }
 }

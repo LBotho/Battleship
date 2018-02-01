@@ -5,16 +5,16 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Boolean player2human = player2Choice();
-        Game game = new Game(player2human);
+        Boolean player2Human = player2Choice();
+        Game game = new Game(player2Human);
+        game.init();
     }
 
     private static Boolean player2Choice () {
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        Scanner reader = new Scanner(System.in);
         Boolean player2Human = false;
         System.out.println("You want to play against a human player or a computer ? (human/computer)");
         String str = reader.nextLine();
-        reader.close();
         if (str.equals("human")) {
             player2Human = true;
         } else if (str.equals("computer")) {
