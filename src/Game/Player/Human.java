@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Human implements Player {
-    List<Boat> boatsList = new ArrayList<>();
+    private List<Boat> boatsList = new ArrayList<>();
 
     public Human() {
         System.out.println("Constructeur human");
