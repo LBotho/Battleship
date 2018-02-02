@@ -68,6 +68,36 @@ public class Grid {
         }
     }
 
+    public void removeBoat(Boat boat) {
+        switch (boat.getDirection()) {
+            case NORTH:
+                for (int i=0; i<boat.getSize();i++) {
+                    board[boat.getPosition().getPosY()-i][boat.getPosition().getPosX()].setBoat(null);
+                    board[boat.getPosition().getPosY()-i][boat.getPosition().getPosX()].setIllustration(" ");
+                }
+                break;
+            case EAST:
+                for (int i=0; i<boat.getSize();i++) {
+                    board[boat.getPosition().getPosY()][boat.getPosition().getPosX()+i].setBoat(null);
+                    board[boat.getPosition().getPosY()][boat.getPosition().getPosX()+i].setIllustration(" ");
+                }
+                break;
+            case SOUTH:
+                for (int i=0; i<boat.getSize();i++) {
+                    board[boat.getPosition().getPosY()+i][boat.getPosition().getPosX()].setBoat(null);
+                    board[boat.getPosition().getPosY()+i][boat.getPosition().getPosX()].setIllustration(" ");
+                }
+                break;
+            case WEST:
+                for (int i=0; i<boat.getSize();i++) {
+                    board[boat.getPosition().getPosY()][boat.getPosition().getPosX()-i].setBoat(null);
+                    board[boat.getPosition().getPosY()][boat.getPosition().getPosX()-i].setIllustration(" ");
+                }
+                break;
+        }
+
+    }
+
     public Case[][] getBoard() {
         return board;
     }

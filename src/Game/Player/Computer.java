@@ -1,6 +1,7 @@
 package Game.Player;
 
 import Game.Boats.*;
+import Game.Grid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 public class Computer implements Player {
 
     List<Boat> boatsList = new ArrayList<>();
+    Grid attackGrid = new Grid();
+    Grid defenseGrid = new Grid();
 
     public Computer() {
         System.out.println("Constructeur computer");
@@ -20,6 +23,11 @@ public class Computer implements Player {
 
     @Override
     public void placeBoats() {
+
+    }
+
+    @Override
+    public void moveBoat() {
 
     }
 }
