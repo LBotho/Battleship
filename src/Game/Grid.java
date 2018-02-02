@@ -1,5 +1,7 @@
 package Game;
 
+import Game.Boats.Boat;
+
 public class Grid {
     private final int size=10;
     private char[][] board = new char[size][size];
@@ -25,6 +27,31 @@ public class Grid {
                 System.out.print(j == 9 ? "["+ this.board[i][j] +" ]" : "["+ this.board[i][j] +"]");
             }
             System.out.println("");
+        }
+    }
+
+    public void addBoat(Boat boat) {
+        switch (boat.getDirection()) {
+            case NORTH:
+                for (int i=0; i<boat.getSize();i++) {
+                    board[(int)boat.getPosition().x][(int)boat.getPosition().y-i] = 'x';
+                }
+                break;
+            case EAST:
+                for (int i=0; i<boat.getSize();i++) {
+                    board[(int)boat.getPosition().x+i][(int)boat.getPosition().y] = 'x';
+                }
+                break;
+            case SOUTH:
+                for (int i=0; i<boat.getSize();i++) {
+                    board[(int)boat.getPosition().x][(int)boat.getPosition().y+i] = 'x';
+                }
+                break;
+            case WEST:
+                for (int i=0; i<boat.getSize();i++) {
+                    board[(int)boat.getPosition().x-i][(int)boat.getPosition().y] = 'x';
+                }
+                break;
         }
     }
 }
