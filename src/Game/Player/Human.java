@@ -62,20 +62,34 @@ public class Human implements Player {
         return input;
     }
 
-    private Boolean checkBoatPosition(int column, int row, Direction direction, int size) {
+    private Boolean checkBoatPosition(int column, int row, Direction direction, int boatSize) {
         Boolean check = false;
         switch (direction) {
             case NORTH:
-                if (row-size >= 0) check = true;
+
+                if (row-boatSize >= 0) {
+                    check = true;
+                } else {
+                    check = false;
+                    break;
+                }
+                for (int i=0; i<boatSize;i++) {
+                    System.out.println("Check : "+Integer.valueOf(row-i)+"/"+column);
+                    System.out.println("Boat : "+Player.defenseGrid.getBoard()[row-i-1][column].getBoat());
+                    if(Player.defenseGrid.getBoard()[row-i][column].getBoat() != null) {
+                        check = false;
+                        break;
+                    }
+                }
                 break;
             case EAST:
-                if (column+size <= 11) check = true;
+                if (column+boatSize <= 11) check = true;
                 break;
             case SOUTH:
-                if (row+size <= 11) check = true;
+                if (row+boatSize <= 11) check = true;
                 break;
             case WEST:
-                if (column-size >= 0) check = true;
+                if (column-boatSize >= 0) check = true;
                 break;
         }
         return check;

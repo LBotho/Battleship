@@ -6,14 +6,14 @@ public class Case {
     private int posX;
     private int posY;
     private Boat boat;
-    private char illustration;
+    private String illustration;
 
     public Case(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
     }
 
-    public Case(int posX, int posY, char illustration) {
+    public Case(int posX, int posY, String illustration) {
         this.posX = posX;
         this.posY = posY;
         this.illustration = illustration;
@@ -43,11 +43,11 @@ public class Case {
         this.boat = boat;
     }
 
-    public char getIllustration() {
+    public String getIllustration() {
         return illustration;
     }
 
-    public void setIllustration(char illustration) {
+    public void setIllustration(String illustration) {
         this.illustration = illustration;
     }
 }
