@@ -1,12 +1,12 @@
 package Game.Player;
 
 import Game.Boats.*;
+import Game.Case;
 import Game.utils.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
 import Game.utils.Functions;
-import com.sun.javafx.geom.Vec2d;
 
 import java.util.Scanner;
 
@@ -45,7 +45,7 @@ public class Human implements Player {
             int posY = Functions.charToIntPosition(choice.split(",")[0]);
             int posX = Integer.valueOf(choice.split(",")[1]);
             boat.setDirection(dir);
-            boat.setPosition(new Vec2d(posX,posY));
+            boat.setPosition(new Case(posX,posY));
             defenseGrid.addBoat(boat);
             defenseGrid.displayGrid();
         }

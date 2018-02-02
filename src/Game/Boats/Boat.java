@@ -1,13 +1,10 @@
 package Game.Boats;
 
+import Game.Case;
 import Game.utils.Direction;
-import com.sun.javafx.geom.Vec2d;
-
-import java.util.Map;
-import java.util.Vector;
 
 abstract public class Boat {
-    private Vec2d position;
+    private Case position;
     private Direction direction;
     private int size;
     private int range;
@@ -22,8 +19,8 @@ abstract public class Boat {
     // GETTERS AND SETTERS
 
 
-    public void setPosition(Vec2d position) { this.position = position; }
-    public Vec2d getPosition() { return position; }
+    public void setPosition(Case position) { this.position = position; }
+    public Case getPosition() { return position; }
 
     public Direction getDirection() { return direction; }
     public void setDirection(Direction direction) { this.direction = direction; }
