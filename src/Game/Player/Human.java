@@ -22,7 +22,6 @@ public class Human implements Player {
         boatsList.add(new Torpedo());
     }
 
-
     @Override
     public void placeBoats() {
         String choice;
@@ -39,7 +38,7 @@ public class Human implements Player {
                 posY = Functions.charToIntPosition(choice.split(",")[0]);
                 direction = Direction.valueOf(choice.split(",")[2].toUpperCase());
                 check = checkBoatPosition(posX,posY,direction,boat.getSize());
-                if (!check) System.out.println("Placement error. \nPlease try again.");
+                if (!check) System.out.println("Placement error.\nPlease try again.");
             } while (!check);
             //Init boat
             boat.setDirection(direction);
@@ -75,6 +74,7 @@ public class Human implements Player {
                 for (int i=0; i<boatSize;i++) {
                     if(Player.defenseGrid.getBoard()[row-i][column].getBoat() != null) {
                         check = false;
+                        System.out.println("There is a boat overlapse with your "+Player.defenseGrid.getBoard()[row-i][column].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -89,6 +89,7 @@ public class Human implements Player {
                 for (int i=0; i<boatSize;i++) {
                     if(Player.defenseGrid.getBoard()[row][column+i].getBoat() != null) {
                         check = false;
+                        System.out.println("There is a boat overlapse with your "+Player.defenseGrid.getBoard()[row][column+i].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -103,6 +104,7 @@ public class Human implements Player {
                 for (int i=0; i<boatSize;i++) {
                     if(Player.defenseGrid.getBoard()[row+i][column].getBoat() != null) {
                         check = false;
+                        System.out.println("There is a boat overlapse with your "+Player.defenseGrid.getBoard()[row+i][column].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -117,6 +119,7 @@ public class Human implements Player {
                 for (int i=0; i<boatSize;i++) {
                     if(Player.defenseGrid.getBoard()[row][column-i].getBoat() != null) {
                         check = false;
+                        System.out.println("There is a boat overlapse with your "+Player.defenseGrid.getBoard()[row][column-i].getBoat().getName()+".");
                         break;
                     }
                 }
