@@ -43,9 +43,6 @@ public class Human implements Player {
             //Si on arrive ici c'est que le check est bon donc on init le bateau
             Direction dir = Direction.valueOf(choice.split(",")[2]);
             int posY = Integer.valueOf(choice.split(",")[1]);
-            int posX = (Functions.charToIntPosition(choice.split(",")[0]));
-
-            boat.setPosition(new Vec2d(posX,posY));
             boat.setDirection(dir);
 
         }
