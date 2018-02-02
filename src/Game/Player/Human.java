@@ -147,22 +147,27 @@ public class Human implements Player {
 
     private List<Case> getTargets() {
         List<Case> targets = new ArrayList<>();
-        for (int i = 1; i < defenseGrid.getSize(); i++) {
-            for (int j = 1; j < defenseGrid.getSize(); j++) {
-                if (defenseGrid.getBoard()[i][j].getBoat() != null) {
-                    targets.add(defenseGrid.getBoard()[i][j]);
-                    for (int k=1;k<=defenseGrid.getBoard()[i][j].getBoat().getRange();k++) {
-                        if (i-k > 0) {
-                            targets.add(defenseGrid.getBoard()[i-k][j]);
-                        } else if (i+k <= 11) {
-                            targets.add(defenseGrid.getBoard()[i+k][j]);
-                        }
-                        if (j-k > 0) {
-                            targets.add(defenseGrid.getBoard()[i][j-k]);
-                        } else if (j+k <= 11) {
-                            targets.add(defenseGrid.getBoard()[i][j+k]);
-                        }
+        for (int colonne = 1; colonne < defenseGrid.getSize(); colonne++) {
+            for (int ligne = 1; ligne < defenseGrid.getSize(); ligne++) {
+
+                if (defenseGrid.getBoard()[colonne][ligne].getBoat() != null) {
+                    System.out.println("colonne grid: "+colonne);
+                    System.out.println("ligne grid: "+ligne);
+                    int range = defenseGrid.getBoard()[colonne][ligne].getBoat().getRange();
+
+                    System.out.println("colonne case: "+defenseGrid.getBoard()[colonne][ligne].getColonne());
+                    System.out.println("ligne case: "+defenseGrid.getBoard()[colonne][ligne].getLigne());
+
+                    System.out.println("");
+                    targets.add(defenseGrid.getBoard()[colonne][ligne]);
+
+                    for(int k=1;k<=range; k++) {
+                        System.out.println(k);
+                        //north
+
+
                     }
+
                 }
             }
         }
@@ -199,21 +204,21 @@ public class Human implements Player {
 
                 switch (dirToMove) {
                     case NORTH:
-                        newPosX = boatToMove.getPosition().getPosX();
-                        newPosY = boatToMove.getPosition().getPosY()-nbOfMove;
+                        newPosX = boatToMove.getPosition().getColonne();
+                        newPosY = boatToMove.getPosition().getLigne()-nbOfMove;
                         break;
                     case SOUTH:
-                        newPosX = boatToMove.getPosition().getPosX();
-                        newPosY = boatToMove.getPosition().getPosY()+nbOfMove;
+                        newPosX = boatToMove.getPosition().getColonne();
+                        newPosY = boatToMove.getPosition().getLigne()+nbOfMove;
 
                         break;
                     case WEST:
-                        newPosX = boatToMove.getPosition().getPosX()-nbOfMove;
-                        newPosY = boatToMove.getPosition().getPosY();
+                        newPosX = boatToMove.getPosition().getColonne()-nbOfMove;
+                        newPosY = boatToMove.getPosition().getLigne();
                         break;
                     case EAST:
-                        newPosX = boatToMove.getPosition().getPosX()+nbOfMove;
-                        newPosY = boatToMove.getPosition().getPosY();
+                        newPosX = boatToMove.getPosition().getColonne()+nbOfMove;
+                        newPosY = boatToMove.getPosition().getLigne();
                         break;
                 }
                 check = checkBoatPosition(newPosX,newPosY,boatToMove.getDirection(),boatToMove.getSize());

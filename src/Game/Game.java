@@ -17,10 +17,10 @@ public class Game {
         System.out.println("#            PLAYER 1 BOATS PLACEMENT            #");
         System.out.println("##################################################");
         player1.placeBoats();
-        System.out.println("\n##################################################");
-        System.out.println("#            PLAYER 2 BOATS PLACEMENT            #");
-        System.out.println("##################################################");
-        player2.placeBoats();
+//        System.out.println("\n##################################################");
+//        System.out.println("#            PLAYER 2 BOATS PLACEMENT            #");
+//        System.out.println("##################################################");
+//        player2.placeBoats();
 
     }
 
