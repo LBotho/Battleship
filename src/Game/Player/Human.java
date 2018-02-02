@@ -66,7 +66,6 @@ public class Human implements Player {
         Boolean check = false;
         switch (direction) {
             case NORTH:
-
                 if (row-boatSize >= 0) {
                     check = true;
                 } else {
@@ -74,8 +73,6 @@ public class Human implements Player {
                     break;
                 }
                 for (int i=0; i<boatSize;i++) {
-                    System.out.println("Check : "+Integer.valueOf(row-i)+"/"+column);
-                    System.out.println("Boat : "+Player.defenseGrid.getBoard()[row-i-1][column].getBoat());
                     if(Player.defenseGrid.getBoard()[row-i][column].getBoat() != null) {
                         check = false;
                         break;
@@ -83,13 +80,46 @@ public class Human implements Player {
                 }
                 break;
             case EAST:
-                if (column+boatSize <= 11) check = true;
+                if (column+boatSize <= 11) {
+                    check = true;
+                } else {
+                    check = false;
+                    break;
+                }
+                for (int i=0; i<boatSize;i++) {
+                    if(Player.defenseGrid.getBoard()[row][column+i].getBoat() != null) {
+                        check = false;
+                        break;
+                    }
+                }
                 break;
             case SOUTH:
-                if (row+boatSize <= 11) check = true;
+                if (row+boatSize <= 11) {
+                    check = true;
+                } else {
+                    check = false;
+                    break;
+                }
+                for (int i=0; i<boatSize;i++) {
+                    if(Player.defenseGrid.getBoard()[row+i][column].getBoat() != null) {
+                        check = false;
+                        break;
+                    }
+                }
                 break;
             case WEST:
-                if (column-boatSize >= 0) check = true;
+                if (column-boatSize >= 0) {
+                    check = true;
+                } else {
+                    check = false;
+                    break;
+                }
+                for (int i=0; i<boatSize;i++) {
+                    if(Player.defenseGrid.getBoard()[row][column-i].getBoat() != null) {
+                        check = false;
+                        break;
+                    }
+                }
                 break;
         }
         return check;

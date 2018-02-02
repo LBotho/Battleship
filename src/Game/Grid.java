@@ -43,8 +43,8 @@ public class Grid {
         switch (boat.getDirection()) {
             case NORTH:
                 for (int i=0; i<boat.getSize();i++) {
-                    board[(int)boat.getPosition().getPosY()-i][(int)boat.getPosition().getPosX()].setBoat(boat);
-                    board[(int)boat.getPosition().getPosY()-i][(int)boat.getPosition().getPosX()].setIllustration("x");
+                    board[boat.getPosition().getPosY()-i][boat.getPosition().getPosX()].setBoat(boat);
+                    board[boat.getPosition().getPosY()-i][boat.getPosition().getPosX()].setIllustration("x");
                 }
                 break;
             case EAST:
@@ -57,14 +57,14 @@ public class Grid {
                 break;
             case SOUTH:
                 for (int i=0; i<boat.getSize();i++) {
-                    board[(int)boat.getPosition().getPosY()+i][(int)boat.getPosition().getPosX()].setBoat(boat);
-                    board[(int)boat.getPosition().getPosY()+i][(int)boat.getPosition().getPosX()].setIllustration("x");
+                    board[boat.getPosition().getPosY()+i][boat.getPosition().getPosX()].setBoat(boat);
+                    board[boat.getPosition().getPosY()+i][boat.getPosition().getPosX()].setIllustration("x");
                 }
                 break;
             case WEST:
                 for (int i=0; i<boat.getSize();i++) {
-                    board[(int)boat.getPosition().getPosY()][(int)boat.getPosition().getPosX()-i].setBoat(boat);
-                    board[(int)boat.getPosition().getPosY()][(int)boat.getPosition().getPosX()-i].setIllustration("x");
+                    board[boat.getPosition().getPosY()][boat.getPosition().getPosX()-i].setBoat(boat);
+                    board[boat.getPosition().getPosY()][boat.getPosition().getPosX()-i].setIllustration("x");
                 }
                 break;
         }
