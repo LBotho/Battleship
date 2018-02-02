@@ -9,7 +9,7 @@ public class Grid {
     public Grid() {
         for (int i=0; i<size;i++) {
             for (int j=0; j<size;j++) {
-                this.board[i][j]= new Case(i,i,' ');
+                this.board[i][j]= new Case(i,j,' ');
             }
         }
     }
@@ -34,21 +34,25 @@ public class Grid {
         switch (boat.getDirection()) {
             case NORTH:
                 for (int i=0; i<boat.getSize();i++) {
+                    board[(int)boat.getPosition().getPosY()-1-i][(int)boat.getPosition().getPosX()-1].setBoat(boat);
                     board[(int)boat.getPosition().getPosY()-1-i][(int)boat.getPosition().getPosX()-1].setIllustration('x');
                 }
                 break;
             case EAST:
                 for (int i=0; i<boat.getSize();i++) {
+                    board[(int)boat.getPosition().getPosY()-1][(int)boat.getPosition().getPosX()-1+i].setBoat(boat);
                     board[(int)boat.getPosition().getPosY()-1][(int)boat.getPosition().getPosX()-1+i].setIllustration('x');
                 }
                 break;
             case SOUTH:
                 for (int i=0; i<boat.getSize();i++) {
+                    board[(int)boat.getPosition().getPosY()-1+i][(int)boat.getPosition().getPosX()-1].setBoat(boat);
                     board[(int)boat.getPosition().getPosY()-1+i][(int)boat.getPosition().getPosX()-1].setIllustration('x');
                 }
                 break;
             case WEST:
                 for (int i=0; i<boat.getSize();i++) {
+                    board[(int)boat.getPosition().getPosY()-1][(int)boat.getPosition().getPosX()-1-i].setBoat(boat);
                     board[(int)boat.getPosition().getPosY()-1][(int)boat.getPosition().getPosX()-1-i].setIllustration('x');
                 }
                 break;
