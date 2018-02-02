@@ -49,8 +49,6 @@ public class Grid {
                 break;
             case EAST:
                 for (int i=0; i<boat.getSize();i++) {
-                    System.out.println(boat.getPosition().getPosY() );
-                    System.out.println(boat.getPosition().getPosX()+i);
                     board[boat.getPosition().getPosY()][boat.getPosition().getPosX()+i].setBoat(boat);
                     board[boat.getPosition().getPosY()][boat.getPosition().getPosX()+i].setIllustration("x");
                 }

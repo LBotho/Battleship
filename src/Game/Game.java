@@ -20,6 +20,6 @@ public class Game {
         System.out.println("##################################################");
         System.out.println("#            PLAYER 2 BOATS PLACEMENT            #");
         System.out.println("##################################################\n");
-        //player2.placeBoats();
+        player2.placeBoats();
     }
 }
