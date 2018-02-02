@@ -42,8 +42,8 @@ public class Human implements Player {
             }
             //Si on arrive ici c'est que le check est bon donc on init le bateau
             Direction dir = Direction.valueOf(choice.split(",")[2]);
-            int posX = Functions.charToIntPosition(choice.split(",")[0]);
-            int posY = Integer.valueOf(choice.split(",")[1]);
+            int posY = Functions.charToIntPosition(choice.split(",")[0]);
+            int posX = Integer.valueOf(choice.split(",")[1]);
             boat.setDirection(dir);
             boat.setPosition(new Vec2d(posX,posY));
             defenseGrid.addBoat(boat);
@@ -72,13 +72,13 @@ public class Human implements Player {
 
         switch (direction) {
             case NORTH:
-                if (row-size-1 > 0) check = true;
+                if (row-size >= 0) check = true;
                 break;
             case EAST:
-                if (column+size < 10) check = true;
+                if (column+size <= 11) check = true;
                 break;
             case SOUTH:
-                if (row+size-1 < 11) check = true;
+                if (row+size <= 11) check = true;
                 break;
             case WEST:
                 if (column-size >= 0) check = true;

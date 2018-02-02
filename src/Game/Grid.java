@@ -34,22 +34,22 @@ public class Grid {
         switch (boat.getDirection()) {
             case NORTH:
                 for (int i=0; i<boat.getSize();i++) {
-                    board[(int)boat.getPosition().x][(int)boat.getPosition().y-i] = 'x';
+                    board[(int)boat.getPosition().y-1-i][(int)boat.getPosition().x-1] = 'x';
                 }
                 break;
             case EAST:
                 for (int i=0; i<boat.getSize();i++) {
-                    board[(int)boat.getPosition().x+i][(int)boat.getPosition().y] = 'x';
+                    board[(int)boat.getPosition().y-1][(int)boat.getPosition().x-1+i] = 'x';
                 }
                 break;
             case SOUTH:
                 for (int i=0; i<boat.getSize();i++) {
-                    board[(int)boat.getPosition().x][(int)boat.getPosition().y+i] = 'x';
+                    board[(int)boat.getPosition().y-1+i][(int)boat.getPosition().x-1] = 'x';
                 }
                 break;
             case WEST:
                 for (int i=0; i<boat.getSize();i++) {
-                    board[(int)boat.getPosition().x-i][(int)boat.getPosition().y] = 'x';
+                    board[(int)boat.getPosition().y-1][(int)boat.getPosition().x-1-i] = 'x';
                 }
                 break;
         }
