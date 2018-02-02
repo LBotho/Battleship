@@ -189,7 +189,5 @@ public class Human implements Player {
         } else if (choice.equalsIgnoreCase("no")) {
             return;
         }
-
-        ;
     }
 }
