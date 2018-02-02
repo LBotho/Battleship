@@ -1,10 +1,10 @@
 package Game.Boats;
 
-public class Battleship extends Boat {
-    public Battleship() {
+public class Torpedo extends Boat {
+    public Torpedo() {
         setSize(2);
         setRange(5);
-        setName("Battleship");
+        setName("Torpedo");
     }
     @Override
     void move() {

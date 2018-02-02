@@ -1,10 +1,8 @@
 package Game.Player;
 
 import Game.Boats.*;
-import Game.Grid;
-import Game.utils.*;
+import Game.utils.Direction;
 
-import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
 import java.util.List;
 import Game.utils.Functions;
@@ -18,10 +16,10 @@ public class Human implements Player {
     public Human() {
         System.out.println("Constructeur human");
         boatsList.add(new Carrier());
-        boatsList.add(new Battleship());
         boatsList.add(new Cruiser());
-        boatsList.add(new Submarine());
         boatsList.add(new Destroyer());
+        boatsList.add(new Submarine());
+        boatsList.add(new Torpedo());
     }
 
 
@@ -29,7 +27,7 @@ public class Human implements Player {
     public void placeBoats() {
         String choice;
         defenseGrid.displayGrid();
-        System.out.println("\nYou have 5 boats to place: 1 Carrier, 1 Battleship, 1 Cruiser, 1 Submarine and 1 Destroyer.");
+        System.out.println("\nYou have 5 boats to place: 1 Carrier, 1 Torpedo, 1 Cruiser, 1 Submarine and 1 Destroyer.");
         System.out.println("To place a boat, you have to write a square where to place the stern of the boat and a direction for the boat.");
         System.out.println("Format example: B,6,EAST");
         for (Boat boat : boatsList) {

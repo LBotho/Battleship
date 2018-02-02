@@ -12,10 +12,10 @@ public class Computer implements Player {
     public Computer() {
         System.out.println("Constructeur computer");
         boatsList.add(new Carrier());
-        boatsList.add(new Battleship());
         boatsList.add(new Cruiser());
-        boatsList.add(new Submarine());
         boatsList.add(new Destroyer());
+        boatsList.add(new Submarine());
+        boatsList.add(new Torpedo());
     }
 
     @Override
