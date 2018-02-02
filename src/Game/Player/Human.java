@@ -3,12 +3,12 @@ package Game.Player;
 import Game.Boats.*;
 import Game.Case;
 import Game.utils.Direction;
+import Game.utils.Functions;
 
 import java.util.ArrayList;
 import java.util.List;
-import Game.utils.Functions;
-
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Human implements Player {
     List<Boat> boatsList = new ArrayList<>();
@@ -26,25 +26,23 @@ public class Human implements Player {
     @Override
     public void placeBoats() {
         String choice;
+        Direction direction;
+        int posX,posY;
         defenseGrid.displayGrid();
-        System.out.println("\nYou have 5 boats to place: 1 Carrier, 1 Torpedo, 1 Cruiser, 1 Submarine and 1 Destroyer.");
-        System.out.println("To place a boat, you have to write a square where to place the stern of the boat and a direction for the boat.");
-        System.out.println("Format example: B,6,EAST");
+        System.out.println("\nYou have 5 boats to place: 1 Carrier, 1 Torpedo, 1 Cruiser, 1 Submarine and 1 Destroyer.\nTo place a boat, you have to write a square where to place the stern of the boat and a direction for the boat.\nFormat example (case insensitive): B,6,EAST");
         for (Boat boat : boatsList) {
+            Boolean check;
             System.out.println("Where do you want to place your "+boat.getName()+" (size="+boat.getSize()+") ?");
-            choice = readChoice();
-            Boolean check = checkBoatPosition(choice, boat.getSize());
-            while (!check) {
-                System.out.println("Placement error.");
-                System.out.println("Please try again.");
+            do {
                 choice = readChoice();
-                check = checkBoatPosition(choice, boat.getSize());
-            }
-            //Si on arrive ici c'est que le check est bon donc on init le bateau
-            Direction dir = Direction.valueOf(choice.split(",")[2]);
-            int posY = Functions.charToIntPosition(choice.split(",")[0]);
-            int posX = Integer.valueOf(choice.split(",")[1]);
-            boat.setDirection(dir);
+                posX = Integer.valueOf(choice.split(",")[1]);
+                posY = Functions.charToIntPosition(choice.split(",")[0]);
+                direction = Direction.valueOf(choice.split(",")[2].toUpperCase());
+                check = checkBoatPosition(posX,posY,direction,boat.getSize());
+                if (!check) System.out.println("Placement error. \nPlease try again.");
+            } while (!check);
+            //Init boat
+            boat.setDirection(direction);
             boat.setPosition(new Case(posX,posY));
             defenseGrid.addBoat(boat);
             defenseGrid.displayGrid();
@@ -54,7 +52,8 @@ public class Human implements Player {
     private String readChoice() {
         Scanner reader = new Scanner(System.in);
         String input = reader.nextLine();
-        while (!input.matches("([A-J]{1}),([1-9]|10),(NORTH|WEST|SOUTH|EAST)")) {
+        Pattern ptn = Pattern.compile("([A-J]{1}),([1-9]|10),(NORTH|WEST|SOUTH|EAST)", Pattern.CASE_INSENSITIVE);
+        while (!ptn.matcher(input).matches()) {
             System.out.println("Format error. Example: B,10,WEST");
             System.out.println("Please try again.");
             reader = new Scanner(System.in);
@@ -63,13 +62,8 @@ public class Human implements Player {
         return input;
     }
 
-    private Boolean checkBoatPosition(String position, int size) {
+    private Boolean checkBoatPosition(int column, int row, Direction direction, int size) {
         Boolean check = false;
-        String[] res = position.split(",");
-        int row = Functions.charToIntPosition(res[0]);
-        int column = Integer.valueOf(res[1]);
-        Direction direction = Direction.valueOf(res[2]);
-
         switch (direction) {
             case NORTH:
                 if (row-size >= 0) check = true;
