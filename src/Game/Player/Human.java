@@ -1,8 +1,8 @@
 package Game.Player;
 
 import Game.Boats.*;
-import Game.Case;
-import Game.Grid;
+import Game.Grid.Case;
+import Game.Grid.Grid;
 import Game.utils.Direction;
 import Game.utils.Functions;
 
@@ -12,9 +12,9 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Human implements Player {
+    private Grid attackGrid = new Grid();
+    private Grid defenseGrid = new Grid();
     private List<Boat> boatsList = new ArrayList<>();
-    Grid attackGrid = new Grid();
-    Grid defenseGrid = new Grid();
 
     public Human() {
         boatsList.add(new Carrier());
@@ -47,8 +47,22 @@ public class Human implements Player {
             defenseGrid.addBoat(boat);
             defenseGrid.displayGrid();
         }
-        defenseGrid.displayGrid();
+    }
 
+    @Override
+    public List<Boat> getBoatsList() {
+        return this.boatsList;
+    }
+
+    @Override
+    public void attack() {
+        List<Case> targets = getTargets();
+        for (Case target: targets) {
+            attackGrid.addTarget(target);
+        }
+        attackGrid.displayGrid();
+        System.out.println("What target do you want to fire ?");
+        String choice = readChoice("[A-J]{1},([1-9]|10)");
     }
 
     private String readChoice(String regex) {
@@ -129,6 +143,30 @@ public class Human implements Player {
                 break;
         }
         return check;
+    }
+
+    private List<Case> getTargets() {
+        List<Case> targets = new ArrayList<>();
+        for (int i = 1; i < defenseGrid.getSize(); i++) {
+            for (int j = 1; j < defenseGrid.getSize(); j++) {
+                if (defenseGrid.getBoard()[i][j].getBoat() != null) {
+                    targets.add(defenseGrid.getBoard()[i][j]);
+                    for (int k=1;k<=defenseGrid.getBoard()[i][j].getBoat().getRange();k++) {
+                        if (i-k > 0) {
+                            targets.add(defenseGrid.getBoard()[i-k][j]);
+                        } else if (i+k <= 11) {
+                            targets.add(defenseGrid.getBoard()[i+k][j]);
+                        }
+                        if (j-k > 0) {
+                            targets.add(defenseGrid.getBoard()[i][j-k]);
+                        } else if (j+k <= 11) {
+                            targets.add(defenseGrid.getBoard()[i][j+k]);
+                        }
+                    }
+                }
+            }
+        }
+        return targets;
     }
 
     @Override

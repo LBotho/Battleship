@@ -1,6 +1,6 @@
 package Game.Boats;
 
-import Game.Case;
+import Game.Grid.Case;
 import Game.utils.Direction;
 
 abstract public class Boat {
@@ -11,13 +11,9 @@ abstract public class Boat {
     private int health = 2;
     private String name;
 
-
     abstract void move();
-    abstract void attack();
-    abstract int[] getTargets();
 
     // GETTERS AND SETTERS
-
 
     public void setPosition(Case position) { this.position = position; }
     public Case getPosition() { return position; }
@@ -36,5 +32,4 @@ abstract public class Boat {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-
 }

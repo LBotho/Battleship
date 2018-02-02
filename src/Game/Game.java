@@ -15,12 +15,34 @@ public class Game {
     public void init () {
         System.out.println("##################################################");
         System.out.println("#            PLAYER 1 BOATS PLACEMENT            #");
-        System.out.println("##################################################\n");
-        player1.placeBoats();
         System.out.println("##################################################");
+        player1.placeBoats();
+        System.out.println("\n##################################################");
         System.out.println("#            PLAYER 2 BOATS PLACEMENT            #");
-        System.out.println("##################################################\n");
+        System.out.println("##################################################");
         player2.placeBoats();
 
+    }
+
+    public void play() {
+//        boolean player1Fail=false,player2Fail=false;
+        while (!player1.getBoatsList().isEmpty() || !player2.getBoatsList().isEmpty()) {
+            System.out.println("\n##################################################");
+            System.out.println("#                    PLAYER 1                    #");
+            System.out.println("##################################################\n");
+//            if (player2Fail) {
+//                player1.askMove();
+//            }
+            player1.attack();
+
+            System.out.println("\n##################################################");
+            System.out.println("#                    PLAYER 2                    #");
+            System.out.println("##################################################\n");
+//            if (player1Fail) {
+//                player1.askMove();
+//            }
+            player2.attack();
+
+        }
     }
 }

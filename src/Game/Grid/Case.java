@@ -1,4 +1,4 @@
-package Game;
+package Game.Grid;
 
 import Game.Boats.Boat;
 
@@ -11,11 +11,13 @@ public class Case {
     public Case(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
+        this.boat = null;
     }
 
     public Case(int posX, int posY, String illustration) {
         this.posX = posX;
         this.posY = posY;
+        this.boat = null;
         this.illustration = illustration;
     }
 

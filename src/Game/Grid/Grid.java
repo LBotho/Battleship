@@ -1,10 +1,12 @@
-package Game;
+package Game.Grid;
 
 import Game.Boats.Boat;
 
 public class Grid {
     private final int size=11;
     private Case[][] board = new Case[size][size];
+
+    public int getSize() { return size; }
 
     public Grid() {
         for (int i=0; i<size;i++) {
@@ -100,5 +102,9 @@ public class Grid {
 
     public Case[][] getBoard() {
         return board;
+    }
+
+    public void addTarget(Case target) {
+        board[target.getPosY()][target.getPosX()].setIllustration("o");
     }
 }
