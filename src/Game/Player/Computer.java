@@ -48,4 +48,8 @@ public class Computer implements Player {
     public int hit(Case target) {
         return 0;
     }
+
+    public boolean lost(){
+        return true;
+    }
 }

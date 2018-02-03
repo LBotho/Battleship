@@ -28,25 +28,37 @@ public class Game {
 
     public void play() {
         int player1Shot=0,player2Shot=0;
-        while (!player1.getBoatsList().isEmpty() || !player2.getBoatsList().isEmpty()) {
+        while (true) {
             System.out.println("\n##################################################");
             System.out.println("#                    PLAYER 1                    #");
             System.out.println("##################################################\n");
-//            if (player2Shot == 0) {
-//                player1.askMove();
-//            }
+
             Case target1 = player1.pickTarget();
             player1Shot = player2.hit(target1);
 
+            if(player2.lost()) {
+                System.out.print("Well done Player 1, you won !");
+                break;
+            }
 
             System.out.println("\n##################################################");
             System.out.println("#                    PLAYER 2                    #");
             System.out.println("##################################################\n");
-//            if (!player1Shot == 0) {
-//                player2.askMove();
-//            }
+
+            if (player1Shot == 0) {
+                player2.moveBoat();
+            }
+
             Case target2 = player2.pickTarget();
             player2Shot = player1.hit(target2);
+            if(player1.lost()){
+                System.out.print("Well done Player 2, you won !");
+                break;
+            }
+
+            if (player2Shot == 0) {
+                player1.moveBoat();
+            }
 
         }
     }

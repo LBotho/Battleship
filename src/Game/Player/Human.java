@@ -18,7 +18,7 @@ public class Human implements Player {
 
     public Human() {
         boatsList.add(new Carrier());
-        boatsList.add(new Cruiser());
+//        boatsList.add(new Cruiser());
 //        boatsList.add(new Destroyer());
 //        boatsList.add(new Submarine());
 //        boatsList.add(new Torpedo());
@@ -208,13 +208,15 @@ public class Human implements Player {
             int nbOfBoat = i-1;
 
             System.out.println("Select the boat you want to move and the number of move \"Boat number,(NORTH|WEST|SOUTH|EAST),number of move\"");
+
             Boolean check = false;
             int nbBoatToMove;
             Direction dirToMove;
             int nbOfMove;
             Boat boatToMove;
-            int newPosX = 0;
-            int newPosY = 0;
+            int newRow = 0;
+            int newColumn = 0;
+
             do {
                 String choiceBoat = readChoice("[0-"+nbOfBoat+"],(NORTH|WEST|SOUTH|EAST),[1-2]");
                 nbBoatToMove = Integer.parseInt(choiceBoat.split(",")[0]);
@@ -224,29 +226,29 @@ public class Human implements Player {
 
                 switch (dirToMove) {
                     case NORTH:
-                        newPosX = boatToMove.getPosition().getRow();
-                        newPosY = boatToMove.getPosition().getColumn()-nbOfMove;
+                        newRow = boatToMove.getPosition().getRow()-nbOfMove;
+                        newColumn = boatToMove.getPosition().getColumn();
                         break;
                     case SOUTH:
-                        newPosX = boatToMove.getPosition().getRow();
-                        newPosY = boatToMove.getPosition().getColumn()+nbOfMove;
+                        newRow = boatToMove.getPosition().getRow()+nbOfMove;
+                        newColumn = boatToMove.getPosition().getColumn();
 
                         break;
                     case WEST:
-                        newPosX = boatToMove.getPosition().getRow()-nbOfMove;
-                        newPosY = boatToMove.getPosition().getColumn();
+                        newRow = boatToMove.getPosition().getRow();
+                        newColumn = boatToMove.getPosition().getColumn()-nbOfMove;
                         break;
                     case EAST:
-                        newPosX = boatToMove.getPosition().getRow()+nbOfMove;
-                        newPosY = boatToMove.getPosition().getColumn();
+                        newRow = boatToMove.getPosition().getRow();
+                        newColumn = boatToMove.getPosition().getColumn()+nbOfMove;
                         break;
                 }
-                check = checkBoatPosition(newPosX,newPosY,boatToMove.getDirection(),boatToMove.getSize());
+                check = checkBoatPosition(newRow,newColumn,boatToMove.getDirection(),boatToMove.getSize());
                 if (!check) System.out.println("Placement error.\nPlease try again.");
             } while (!check);
 
             defenseGrid.removeBoat(boatToMove);
-            boatToMove.setPosition(new Case(newPosX, newPosY));
+            boatToMove.setPosition(new Case(newRow, newColumn));
             defenseGrid.addBoat(boatToMove);
 
         } else if (choice.equalsIgnoreCase("no")) {
@@ -269,5 +271,13 @@ public class Human implements Player {
             }
             System.out.println("");
         }
+    }
+
+    public boolean lost() {
+        int totalHealth = 0;
+        for(Boat boat : boatsList) {
+            totalHealth+=boat.getHealth();
+        }
+        return (totalHealth == 0 ? true : false);
     }
 }
