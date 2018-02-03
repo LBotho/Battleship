@@ -79,13 +79,13 @@ public class Human implements Player {
             boat.damage();
             if (boat.getHealth() == 0) {
                 defenseGrid.removeBoat(boat);
-                System.out.println("Sink");
+                System.out.println("Well played, you sank your opponent's "+boat.getName()+"!");
                 return 2;
             }
-            System.out.println("Hit");
+            System.out.println("Nice, you hit one of your opponent's boats!");
             return 1;
         }
-        System.out.println("Miss");
+        System.out.println("You missed!");
         return 0;
     }
 

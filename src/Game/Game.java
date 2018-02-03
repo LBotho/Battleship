@@ -5,6 +5,8 @@ import Game.Player.Computer;
 import Game.Player.Human;
 import Game.Player.Player;
 
+import java.io.IOException;
+
 public class Game {
     private Player player1, player2;
 
@@ -22,7 +24,6 @@ public class Game {
         System.out.println("#            PLAYER 2 BOATS PLACEMENT            #");
         System.out.println("##################################################");
         player2.placeBoats();
-
     }
 
     public void play() {
