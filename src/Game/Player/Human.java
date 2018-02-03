@@ -28,22 +28,22 @@ public class Human implements Player {
     public void placeBoats() {
         String choice;
         Direction direction;
-        int line,column;
+        int row,column;
         System.out.println("\nYou have 5 boats to place: 1 Carrier, 1 Torpedo, 1 Cruiser, 1 Submarine and 1 Destroyer.\nTo place a boat, you have to write a square where to place the stern of the boat and a direction for the boat.\nFormat example (case insensitive): B,6,EAST");
         for (Boat boat : boatsList) {
             Boolean check = false;
             System.out.println("Where do you want to place your "+boat.getName()+" (size="+boat.getSize()+") ?");
             do {
                 choice = readChoice("([A-J]{1}),([1-9]|10),(NORTH|WEST|SOUTH|EAST)");
-                line = Functions.charToIntPosition(choice.split(",")[0]);
+                row = Functions.charToIntPosition(choice.split(",")[0]);
                 column = Integer.valueOf(choice.split(",")[1]);
                 direction = Direction.valueOf(choice.split(",")[2].toUpperCase());
-                check = checkBoatPosition(line,column,direction,boat.getSize());
+                check = checkBoatPosition(row,column,direction,boat.getSize());
                 if (!check) System.out.println("Placement error.\nPlease try again.");
             } while (!check);
             //Init boat
             boat.setDirection(direction);
-            boat.setPosition(new Case(line,column));
+            boat.setPosition(new Case(row,column));
             defenseGrid.addBoat(boat);
             defenseGrid.displayGrid();
         }
@@ -63,9 +63,9 @@ public class Human implements Player {
         Case targetChoice = null;
         do {
             String choice = readChoice("[A-J]{1},([1-9]|10)");
-            int line = Functions.charToIntPosition(choice.split(",")[0]);
+            int row = Functions.charToIntPosition(choice.split(",")[0]);
             int column = Integer.valueOf(choice.split(",")[1]);
-            targetChoice = new Case(line,column);
+            targetChoice = new Case(row,column);
             if (!Functions.containsTarget(targets,targetChoice)) System.out.println("Error: the target you selected is not valid.\nPlease try again.");
         } while (!Functions.containsTarget(targets,targetChoice));
         return targetChoice;
@@ -73,7 +73,7 @@ public class Human implements Player {
 
     @Override
     public int hit(Case target) {
-        Boat boat = defenseGrid.getBoard()[target.getLine()][target.getColumn()].getBoat();
+        Boat boat = defenseGrid.getBoard()[target.getRow()][target.getColumn()].getBoat();
         if (boat != null) {
             boat.damage();
             if (boat.getHealth() == 0) {
@@ -101,20 +101,20 @@ public class Human implements Player {
         return input;
     }
 
-    private Boolean checkBoatPosition(int line, int column, Direction direction, int boatSize) {
+    private Boolean checkBoatPosition(int row, int column, Direction direction, int boatSize) {
         Boolean check = false;
         switch (direction) {
             case NORTH:
-                if (line-boatSize >= 0) {
+                if (row-boatSize >= 0) {
                     check = true;
                 } else {
                     check = false;
                     break;
                 }
                 for (int i=0; i<boatSize;i++) {
-                    if(this.defenseGrid.getBoard()[line-i][column].getBoat() != null) {
+                    if(this.defenseGrid.getBoard()[row-i][column].getBoat() != null) {
                         check = false;
-                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[line-i][column].getBoat().getName()+".");
+                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row-i][column].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -127,24 +127,24 @@ public class Human implements Player {
                     break;
                 }
                 for (int i=0; i<boatSize;i++) {
-                    if(this.defenseGrid.getBoard()[line][column+i].getBoat() != null) {
+                    if(this.defenseGrid.getBoard()[row][column+i].getBoat() != null) {
                         check = false;
-                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[line][column+i].getBoat().getName()+".");
+                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row][column+i].getBoat().getName()+".");
                         break;
                     }
                 }
                 break;
             case SOUTH:
-                if (line+boatSize <= 11) {
+                if (row+boatSize <= 11) {
                     check = true;
                 } else {
                     check = false;
                     break;
                 }
                 for (int i=0; i<boatSize;i++) {
-                    if(this.defenseGrid.getBoard()[line+i][column].getBoat() != null) {
+                    if(this.defenseGrid.getBoard()[row+i][column].getBoat() != null) {
                         check = false;
-                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[line+i][column].getBoat().getName()+".");
+                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row+i][column].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -157,9 +157,9 @@ public class Human implements Player {
                     break;
                 }
                 for (int i=0; i<boatSize;i++) {
-                    if(this.defenseGrid.getBoard()[line][column-i].getBoat() != null) {
+                    if(this.defenseGrid.getBoard()[row][column-i].getBoat() != null) {
                         check = false;
-                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[line][column-i].getBoat().getName()+".");
+                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row][column-i].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -170,22 +170,22 @@ public class Human implements Player {
 
     private List<Case> getTargets() {
         List<Case> targets = new ArrayList<>();
-        for (int line = 1; line < defenseGrid.getSize(); line++) {
+        for (int row = 1; row < defenseGrid.getSize(); row++) {
             for (int column = 1; column < defenseGrid.getSize(); column++) {
-                if (defenseGrid.getBoard()[line][column].getBoat() != null) {
-                    int range = defenseGrid.getBoard()[line][column].getBoat().getRange();
-                    targets.add(defenseGrid.getBoard()[line][column]);
+                if (defenseGrid.getBoard()[row][column].getBoat() != null) {
+                    int range = defenseGrid.getBoard()[row][column].getBoat().getRange();
+                    targets.add(defenseGrid.getBoard()[row][column]);
                     for(int k=1;k<=range; k++) {
                         //We check every time if the potential target isn't out of the grid
                         //We don't check duplicate because it won't matter at the end
                         //north
-                        if(line-k > 0) targets.add(defenseGrid.getBoard()[line-k][column]);
+                        if(row-k > 0) targets.add(defenseGrid.getBoard()[row-k][column]);
                         //east
-                        if(column+k <= 10) targets.add(defenseGrid.getBoard()[line][column+k]);
+                        if(column+k <= 10) targets.add(defenseGrid.getBoard()[row][column+k]);
                         //south
-                        if(line+k <= 10) targets.add(defenseGrid.getBoard()[line+k][column]);
+                        if(row+k <= 10) targets.add(defenseGrid.getBoard()[row+k][column]);
                         //west
-                        if(column-k > 0) targets.add(defenseGrid.getBoard()[line][column-k]);
+                        if(column-k > 0) targets.add(defenseGrid.getBoard()[row][column-k]);
                     }
                 }
             }
@@ -223,20 +223,20 @@ public class Human implements Player {
 
                 switch (dirToMove) {
                     case NORTH:
-                        newPosX = boatToMove.getPosition().getLine();
+                        newPosX = boatToMove.getPosition().getRow();
                         newPosY = boatToMove.getPosition().getColumn()-nbOfMove;
                         break;
                     case SOUTH:
-                        newPosX = boatToMove.getPosition().getLine();
+                        newPosX = boatToMove.getPosition().getRow();
                         newPosY = boatToMove.getPosition().getColumn()+nbOfMove;
 
                         break;
                     case WEST:
-                        newPosX = boatToMove.getPosition().getLine()-nbOfMove;
+                        newPosX = boatToMove.getPosition().getRow()-nbOfMove;
                         newPosY = boatToMove.getPosition().getColumn();
                         break;
                     case EAST:
-                        newPosX = boatToMove.getPosition().getLine()+nbOfMove;
+                        newPosX = boatToMove.getPosition().getRow()+nbOfMove;
                         newPosY = boatToMove.getPosition().getColumn();
                         break;
                 }
@@ -257,14 +257,14 @@ public class Human implements Player {
         //Same for both grid
         System.out.println("           Defense grid                        Attack grid");
         int gridSize = attackGrid.getSize();
-        for (int line = 0; line < gridSize; line++) {
+        for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
-                System.out.print(column == 10 ? "["+ this.defenseGrid.getBoard()[line][column].getIllustration() +"]" : "["+ this.defenseGrid.getBoard()[line][column].getIllustration() +"]");
+                System.out.print(column == 10 ? "["+ this.defenseGrid.getBoard()[row][column].getIllustration() +"]" : "["+ this.defenseGrid.getBoard()[row][column].getIllustration() +"]");
 
             }
-            System.out.print(line == 0 ? " " : "  ");
+            System.out.print(row == 0 ? " " : "  ");
             for (int column = 0; column < gridSize; column++) {
-                System.out.print(column == 10 ? "["+ this.attackGrid.getBoard()[line][column].getIllustration() +"]" : "["+ this.attackGrid.getBoard()[line][column].getIllustration() +"]");
+                System.out.print(column == 10 ? "["+ this.attackGrid.getBoard()[row][column].getIllustration() +"]" : "["+ this.attackGrid.getBoard()[row][column].getIllustration() +"]");
             }
             System.out.println("");
         }

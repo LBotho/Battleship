@@ -3,15 +3,15 @@ package Game.Grid;
 import Game.Boats.Boat;
 
 public class Case {
-    private int line;
+    private int row;
     private int column;
 
-    public int getLine() {
-        return line;
+    public int getRow() {
+        return row;
     }
 
-    public void setLine(int line) {
-        this.line = line;
+    public void setRow(int row) {
+        this.row = row;
     }
 
     public int getColumn() {
@@ -25,14 +25,14 @@ public class Case {
     private Boat boat;
     private String illustration;
 
-    public Case(int line, int column) {
-        this.line = line;
+    public Case(int row, int column) {
+        this.row = row;
         this.column = column;
         this.boat = null;
     }
 
-    public Case(int line, int column, String illustration) {
-        this.line = line;
+    public Case(int row, int column, String illustration) {
+        this.row = row;
         this.column = column;
         this.boat = null;
         this.illustration = illustration;
