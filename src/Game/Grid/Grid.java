@@ -103,6 +103,6 @@ public class Grid {
     }
 
     public void addTarget(Case target) {
-        board[target.getLigne()][target.getColonne()].setIllustration("o");
+        board[target.getColonne()][target.getLigne()].setIllustration("o");
     }
 }

@@ -18,10 +18,10 @@ public class Human implements Player {
 
     public Human() {
         boatsList.add(new Carrier());
-        boatsList.add(new Cruiser());
-        boatsList.add(new Destroyer());
-        boatsList.add(new Submarine());
-        boatsList.add(new Torpedo());
+//        boatsList.add(new Cruiser());
+//        boatsList.add(new Destroyer());
+//        boatsList.add(new Submarine());
+//        boatsList.add(new Torpedo());
     }
 
     @Override
@@ -147,25 +147,51 @@ public class Human implements Player {
 
     private List<Case> getTargets() {
         List<Case> targets = new ArrayList<>();
-        for (int colonne = 1; colonne < defenseGrid.getSize(); colonne++) {
-            for (int ligne = 1; ligne < defenseGrid.getSize(); ligne++) {
+//        for (int colonne = 1; colonne < defenseGrid.getSize(); colonne++) {
+//            for (int ligne = 1; ligne < defenseGrid.getSize(); ligne++) {
+//
+//                if (defenseGrid.getBoard()[colonne][ligne].getBoat() != null) {
+//                    System.out.println("colonne grid: "+colonne);
+//                    System.out.println("ligne grid: "+ligne);
+//                    int range = defenseGrid.getBoard()[colonne][ligne].getBoat().getRange();
+//
+//                    System.out.println("colonne case: "+defenseGrid.getBoard()[colonne][ligne].getColonne());
+//                    System.out.println("ligne case: "+defenseGrid.getBoard()[colonne][ligne].getLigne());
+//
+//                    System.out.println("");
+//                    targets.add(defenseGrid.getBoard()[colonne][ligne]);
+//                    System.out.println("add : "+colonne+"/"+ligne);
+//                    for(int k=1;k<=range; k++) {
+//                        //north
+//                        //targets.add(defenseGrid.getBoard()[colonne][ligne]);
+//
+//                    }
+//
+//                }
+//            }
+//        }
 
-                if (defenseGrid.getBoard()[colonne][ligne].getBoat() != null) {
-                    System.out.println("colonne grid: "+colonne);
-                    System.out.println("ligne grid: "+ligne);
-                    int range = defenseGrid.getBoard()[colonne][ligne].getBoat().getRange();
+        for (int ligne = 1; ligne < defenseGrid.getSize(); ligne++) {
+            for (int colonne = 1; colonne < defenseGrid.getSize(); colonne++) {
 
-                    System.out.println("colonne case: "+defenseGrid.getBoard()[colonne][ligne].getColonne());
-                    System.out.println("ligne case: "+defenseGrid.getBoard()[colonne][ligne].getLigne());
-
-                    System.out.println("");
-                    targets.add(defenseGrid.getBoard()[colonne][ligne]);
-
+                if (defenseGrid.getBoard()[ligne][colonne].getBoat() != null) {
+                    int range = defenseGrid.getBoard()[ligne][colonne].getBoat().getRange();
+                    targets.add(defenseGrid.getBoard()[ligne][colonne]);
+                    System.out.println("add : "+ligne+"/"+colonne);
                     for(int k=1;k<=range; k++) {
-                        System.out.println(k);
+                        //We check every time if the potential target isn't out of the grid
+                        //We don't check duplicate because it won't matter at the end
                         //north
+                        if(ligne-k > 0) targets.add(defenseGrid.getBoard()[ligne-k][colonne]);
 
+                        //south
+                        if(ligne+k <= 10) targets.add(defenseGrid.getBoard()[ligne+k][colonne]);
 
+                        //east
+                        if(colonne+k <= 10) targets.add(defenseGrid.getBoard()[ligne][colonne+k]);
+
+                        //west
+                        if(colonne-k > 0) targets.add(defenseGrid.getBoard()[ligne][colonne-k]);
                     }
 
                 }
