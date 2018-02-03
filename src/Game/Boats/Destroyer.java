@@ -6,9 +6,4 @@ public class Destroyer extends Boat {
         setRange(2);
         setName("Destroyer");
     }
-
-    @Override
-    void move() {
-
-    }
 }

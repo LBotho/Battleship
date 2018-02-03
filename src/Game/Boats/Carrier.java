@@ -6,9 +6,4 @@ public class Carrier extends Boat {
         setRange(2);
         setName("Carrier");
     }
-
-    @Override
-    void move() {
-
-    }
 }

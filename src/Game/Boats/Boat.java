@@ -11,8 +11,6 @@ abstract public class Boat {
     private int health = 2;
     private String name;
 
-    abstract void move();
-
     // GETTERS AND SETTERS
 
     public void setPosition(Case position) { this.position = position; }

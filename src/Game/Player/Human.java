@@ -55,14 +55,17 @@ public class Human implements Player {
     }
 
     @Override
-    public void attack() {
+    public Case pickTarget() {
         List<Case> targets = getTargets();
-        for (Case target: targets) {
-            attackGrid.addTarget(target);
-        }
+        for (Case target: targets) { attackGrid.addTarget(target); }
         attackGrid.displayGrid();
         System.out.println("What target do you want to fire ?");
         String choice = readChoice("[A-J]{1},([1-9]|10)");
+        String[] res = choice.split(",");
+        int posX = Integer.valueOf(choice.split(",")[1]);
+        int posY = Functions.charToIntPosition(choice.split(",")[0]);
+        Case targetChoice = new Case(posX,posY);
+        return targetChoice;
     }
 
     private String readChoice(String regex) {
@@ -147,33 +150,8 @@ public class Human implements Player {
 
     private List<Case> getTargets() {
         List<Case> targets = new ArrayList<>();
-//        for (int colonne = 1; colonne < defenseGrid.getSize(); colonne++) {
-//            for (int ligne = 1; ligne < defenseGrid.getSize(); ligne++) {
-//
-//                if (defenseGrid.getBoard()[colonne][ligne].getBoat() != null) {
-//                    System.out.println("colonne grid: "+colonne);
-//                    System.out.println("ligne grid: "+ligne);
-//                    int range = defenseGrid.getBoard()[colonne][ligne].getBoat().getRange();
-//
-//                    System.out.println("colonne case: "+defenseGrid.getBoard()[colonne][ligne].getColonne());
-//                    System.out.println("ligne case: "+defenseGrid.getBoard()[colonne][ligne].getLigne());
-//
-//                    System.out.println("");
-//                    targets.add(defenseGrid.getBoard()[colonne][ligne]);
-//                    System.out.println("add : "+colonne+"/"+ligne);
-//                    for(int k=1;k<=range; k++) {
-//                        //north
-//                        //targets.add(defenseGrid.getBoard()[colonne][ligne]);
-//
-//                    }
-//
-//                }
-//            }
-//        }
-
         for (int ligne = 1; ligne < defenseGrid.getSize(); ligne++) {
             for (int colonne = 1; colonne < defenseGrid.getSize(); colonne++) {
-
                 if (defenseGrid.getBoard()[ligne][colonne].getBoat() != null) {
                     int range = defenseGrid.getBoard()[ligne][colonne].getBoat().getRange();
                     targets.add(defenseGrid.getBoard()[ligne][colonne]);
@@ -183,17 +161,13 @@ public class Human implements Player {
                         //We don't check duplicate because it won't matter at the end
                         //north
                         if(ligne-k > 0) targets.add(defenseGrid.getBoard()[ligne-k][colonne]);
-
                         //south
                         if(ligne+k <= 10) targets.add(defenseGrid.getBoard()[ligne+k][colonne]);
-
                         //east
                         if(colonne+k <= 10) targets.add(defenseGrid.getBoard()[ligne][colonne+k]);
-
                         //west
                         if(colonne-k > 0) targets.add(defenseGrid.getBoard()[ligne][colonne-k]);
                     }
-
                 }
             }
         }

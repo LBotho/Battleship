@@ -1,6 +1,7 @@
 package Game.Player;
 
 import Game.Boats.*;
+import Game.Grid.Case;
 import Game.Grid.Grid;
 
 import java.util.ArrayList;
@@ -37,7 +38,9 @@ public class Computer implements Player {
     }
 
     @Override
-    public void attack() {
+    public Case pickTarget() {
+        Case targetChoice = new Case(0,0);
 
+        return targetChoice;
     }
 }

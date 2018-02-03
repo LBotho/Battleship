@@ -7,9 +7,4 @@ public class Cruiser extends Boat {
         setRange(2);
         setName("Cruiser");
     }
-
-    @Override
-    void move() {
-
-    }
 }

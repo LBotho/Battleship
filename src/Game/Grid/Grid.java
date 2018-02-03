@@ -9,10 +9,8 @@ public class Grid {
     public int getSize() { return size; }
 
     public Grid() {
-
        for (int colonne = 0; colonne < size; colonne++) {
            for (int ligne = 0; ligne < size; ligne++) {
-
                if(colonne == 0 && ligne == 0) {
                    this.board[ligne][colonne] = new Case(ligne,colonne," ");
                } else if (ligne == 0) {
@@ -23,11 +21,8 @@ public class Grid {
                } else {
                    this.board[ligne][colonne] = new Case(ligne,colonne," ");
                }
-
            }
        }
-
-
     }
 
     public void displayGrid() {

@@ -1,5 +1,6 @@
 package Game;
 
+import Game.Grid.Case;
 import Game.Player.Computer;
 import Game.Player.Human;
 import Game.Player.Player;
@@ -33,7 +34,8 @@ public class Game {
 //            if (player2Fail) {
 //                player1.askMove();
 //            }
-            player1.attack();
+            Case target1 = player1.pickTarget();
+
 
             System.out.println("\n##################################################");
             System.out.println("#                    PLAYER 2                    #");
@@ -41,7 +43,8 @@ public class Game {
 //            if (player1Fail) {
 //                player1.askMove();
 //            }
-            player2.attack();
+            player2.pickTarget();
+            Case target2 = player2.pickTarget();
 
         }
     }

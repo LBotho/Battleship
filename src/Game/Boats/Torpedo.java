@@ -6,8 +6,4 @@ public class Torpedo extends Boat {
         setRange(5);
         setName("Torpedo");
     }
-    @Override
-    void move() {
-
-    }
 }
