@@ -70,7 +70,7 @@ public class Human implements Player {
 
     @Override
     public int hit(Case target) {
-        Boat boat = defenseGrid.getBoard()[target.getColonne()][target.getLigne()].getBoat();
+        Boat boat = defenseGrid.getBoard()[target.getLigne()][target.getColonne()].getBoat();
         if (boat != null) {
             boat.damage();
             if (boat.getHealth() == 0) {
