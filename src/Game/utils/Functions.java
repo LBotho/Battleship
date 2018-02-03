@@ -10,7 +10,7 @@ public class Functions {
     }
     public static boolean containsTarget(List<Case> list, Case target) {
         for (Case square: list) {
-            if (target.getColonne() == square.getColonne() && target.getLigne() == square.getLigne()) return true;
+            if (target.getLine() == square.getLine() && target.getColumn() == square.getColumn()) return true;
         }
         return false;
     }

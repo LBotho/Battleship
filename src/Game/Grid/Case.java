@@ -3,38 +3,39 @@ package Game.Grid;
 import Game.Boats.Boat;
 
 public class Case {
-    private int colonne;
-    private int ligne;
+    private int line;
+    private int column;
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line = line;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
     private Boat boat;
     private String illustration;
 
-    public Case(int x, int y) {
-        this.colonne = x;
-        this.ligne = y;
+    public Case(int line, int column) {
+        this.line = line;
+        this.column = column;
         this.boat = null;
     }
 
-    public Case(int x, int y, String illustration) {
-        this.colonne = x;
-        this.ligne = y;
+    public Case(int line, int column, String illustration) {
+        this.line = line;
+        this.column = column;
         this.boat = null;
         this.illustration = illustration;
-    }
-
-    public int getColonne() {
-        return colonne;
-    }
-
-    public void setColonne(int colonne) {
-        this.colonne = colonne;
-    }
-
-    public int getLigne() {
-        return ligne;
-    }
-
-    public void setLigne(int ligne) {
-        this.ligne = ligne;
     }
 
     public Boat getBoat() {

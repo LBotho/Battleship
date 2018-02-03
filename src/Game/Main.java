@@ -1,5 +1,7 @@
 package Game;
 
+import Game.Grid.Grid;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
