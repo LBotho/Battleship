@@ -18,7 +18,7 @@ public class Human implements Player {
 
     public Human() {
         boatsList.add(new Carrier());
-//        boatsList.add(new Cruiser());
+        boatsList.add(new Cruiser());
 //        boatsList.add(new Destroyer());
 //        boatsList.add(new Submarine());
 //        boatsList.add(new Torpedo());
@@ -57,6 +57,7 @@ public class Human implements Player {
     @Override
     public Case pickTarget() {
         List<Case> targets = getTargets();
+        attackGrid.clear();
         for (Case target: targets) { attackGrid.addTarget(target); }
         showBothGrid();
         System.out.println("What target do you want to fire ?");

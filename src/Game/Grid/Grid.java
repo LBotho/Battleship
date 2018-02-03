@@ -100,4 +100,22 @@ public class Grid {
     public void addTarget(Case target) {
         board[target.getRow()][target.getColumn()].setIllustration("o");
     }
+
+    public void clear() {
+        for (int line = 0; line < size; line++) {
+            for (int column = 0; column < size; column++) {
+                if(line == 0 && column == 0) {
+                    this.board[line][column] = new Case(line,column," ");
+                } else if (line == 0) {
+                    this.board[line][column] = new Case(line,column,Integer.toString(column));
+                } else if (column == 0) {
+                    int letterValue = line + 64;
+                    this.board[line][column] = new Case(line,column,Character.toString((char) letterValue));
+                } else {
+                    this.board[line][column] = new Case(line,column," ");
+                }
+            }
+        }
+
+    }
 }
