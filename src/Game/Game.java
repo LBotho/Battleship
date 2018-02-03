@@ -16,7 +16,7 @@ public class Game {
     }
 
     public void init () {
-        System.out.println("##################################################");
+        System.out.println("\n##################################################");
         System.out.println("#            PLAYER 1 BOATS PLACEMENT            #");
         System.out.println("##################################################");
         player1.placeBoats();
