@@ -2,6 +2,7 @@ package Game.Player;
 
 import Game.Boats.Boat;
 import Game.Grid.Case;
+import Game.Grid.Grid;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ public interface Player {
     Case pickTarget();
     int hit(Case target);
     void moveBoat();
+
 }

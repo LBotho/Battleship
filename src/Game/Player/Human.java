@@ -58,7 +58,7 @@ public class Human implements Player {
     public Case pickTarget() {
         List<Case> targets = getTargets();
         for (Case target: targets) { attackGrid.addTarget(target); }
-        attackGrid.displayGrid();
+        showBothGrid();
         System.out.println("What target do you want to fire ?");
         String choice = readChoice("[A-J]{1},([1-9]|10)");
         String[] res = choice.split(",");
@@ -247,6 +247,26 @@ public class Human implements Player {
 
         } else if (choice.equalsIgnoreCase("no")) {
             return;
+        }
+    }
+
+    public void showBothGrid() {
+
+        //Same for both grid
+        System.out.println("           Defense grid                        Attack grid");
+        int gridSize = attackGrid.getSize();
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                System.out.print(j == 10 ? "["+ this.defenseGrid.getBoard()[i][j].getIllustration() +"]" : "["+ this.defenseGrid.getBoard()[i][j].getIllustration() +"]");
+
+            }
+            System.out.print(i == 0 ? " " : "  ");
+
+            for (int j = 0; j < gridSize; j++) {
+                System.out.print(j == 10 ? "["+ this.attackGrid.getBoard()[i][j].getIllustration() +"]" : "["+ this.attackGrid.getBoard()[i][j].getIllustration() +"]");
+            }
+
+            System.out.println("");
         }
     }
 }
