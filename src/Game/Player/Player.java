@@ -9,5 +9,6 @@ public interface Player {
     void placeBoats();
     List<Boat> getBoatsList();
     Case pickTarget();
+    int hit(Case target);
     void moveBoat();
 }

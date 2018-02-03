@@ -68,6 +68,23 @@ public class Human implements Player {
         return targetChoice;
     }
 
+    @Override
+    public int hit(Case target) {
+        Boat boat = defenseGrid.getBoard()[target.getColonne()][target.getLigne()].getBoat();
+        if (boat != null) {
+            boat.damage();
+            if (boat.getHealth() == 0) {
+                defenseGrid.removeBoat(boat);
+                System.out.println("Sink");
+                return 2;
+            }
+            System.out.println("Hit");
+            return 1;
+        }
+        System.out.println("Miss");
+        return 0;
+    }
+
     private String readChoice(String regex) {
         Scanner reader = new Scanner(System.in);
         String input = reader.nextLine();
@@ -155,7 +172,6 @@ public class Human implements Player {
                 if (defenseGrid.getBoard()[ligne][colonne].getBoat() != null) {
                     int range = defenseGrid.getBoard()[ligne][colonne].getBoat().getRange();
                     targets.add(defenseGrid.getBoard()[ligne][colonne]);
-                    System.out.println("add : "+ligne+"/"+colonne);
                     for(int k=1;k<=range; k++) {
                         //We check every time if the potential target isn't out of the grid
                         //We don't check duplicate because it won't matter at the end

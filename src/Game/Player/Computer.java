@@ -43,4 +43,9 @@ public class Computer implements Player {
 
         return targetChoice;
     }
+
+    @Override
+    public int hit(Case target) {
+        return 0;
+    }
 }

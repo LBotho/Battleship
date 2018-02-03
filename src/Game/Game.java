@@ -18,33 +18,34 @@ public class Game {
         System.out.println("#            PLAYER 1 BOATS PLACEMENT            #");
         System.out.println("##################################################");
         player1.placeBoats();
-//        System.out.println("\n##################################################");
-//        System.out.println("#            PLAYER 2 BOATS PLACEMENT            #");
-//        System.out.println("##################################################");
-//        player2.placeBoats();
+        System.out.println("\n##################################################");
+        System.out.println("#            PLAYER 2 BOATS PLACEMENT            #");
+        System.out.println("##################################################");
+        player2.placeBoats();
 
     }
 
     public void play() {
-//        boolean player1Fail=false,player2Fail=false;
+        int player1Shot=0,player2Shot=0;
         while (!player1.getBoatsList().isEmpty() || !player2.getBoatsList().isEmpty()) {
             System.out.println("\n##################################################");
             System.out.println("#                    PLAYER 1                    #");
             System.out.println("##################################################\n");
-//            if (player2Fail) {
+//            if (player2Shot == 0) {
 //                player1.askMove();
 //            }
             Case target1 = player1.pickTarget();
+            player1Shot = player2.hit(target1);
 
 
             System.out.println("\n##################################################");
             System.out.println("#                    PLAYER 2                    #");
             System.out.println("##################################################\n");
-//            if (player1Fail) {
-//                player1.askMove();
+//            if (!player1Shot == 0) {
+//                player2.askMove();
 //            }
-            player2.pickTarget();
             Case target2 = player2.pickTarget();
+            player2Shot = player1.hit(target2);
 
         }
     }
