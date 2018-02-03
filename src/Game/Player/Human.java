@@ -60,11 +60,14 @@ public class Human implements Player {
         for (Case target: targets) { attackGrid.addTarget(target); }
         showBothGrid();
         System.out.println("What target do you want to fire ?");
-        String choice = readChoice("[A-J]{1},([1-9]|10)");
-        String[] res = choice.split(",");
-        int posX = Integer.valueOf(choice.split(",")[1]);
-        int posY = Functions.charToIntPosition(choice.split(",")[0]);
-        Case targetChoice = new Case(posX,posY);
+        Case targetChoice = null;
+        do {
+            String choice = readChoice("[A-J]{1},([1-9]|10)");
+            int posX = Integer.valueOf(choice.split(",")[1]);
+            int posY = Functions.charToIntPosition(choice.split(",")[0]);
+            targetChoice = new Case(posX,posY);
+            if (!Functions.containsTarget(targets,targetChoice)) System.out.println("Error: the target you choosed is not valid.\nPlease try again.");
+        } while (!Functions.containsTarget(targets,targetChoice));
         return targetChoice;
     }
 
