@@ -69,7 +69,7 @@ public class Computer implements Player {
     }
 
     /**
-     * Check if the boat position is valid and if there's no overlapse with other boats.
+     * Check if the boat position is valid and if there's no overlap with other boats.
      *
      * @param row The row the user chose to place the boat start Square.
      * @param column The row the user chose to place the boat start Square.
@@ -200,9 +200,9 @@ public class Computer implements Player {
             List<Square> removedBoat;
 
             do {
-                nbBoatToMove = randomGenerator.nextInt(nbOfBoat - 0 + 1) + 0;
+                nbBoatToMove = randomGenerator.nextInt(nbOfBoat + 1);
                 dirToMove = Direction.randomDirection();
-                nbOfMove = randomGenerator.nextInt(2 - 1 + 1) + 1;;
+                nbOfMove = randomGenerator.nextInt(2 - 1 + 1) + 1;
                 boatToMove = boatsList.get(nbBoatToMove);
 
                 switch (dirToMove) {
@@ -329,7 +329,7 @@ public class Computer implements Player {
                 }
                 break;
         }
-        if(check != false) {
+        if(check) {
             switch (boatDir) {
                 case NORTH:
                     if (row - boatSize >= 0) {
@@ -341,7 +341,7 @@ public class Computer implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row - i][column].getBoat() != null && this.defenseGrid.getBoard()[row - i][column].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlapse with your " + this.defenseGrid.getBoard()[row - i][column].getBoat().getName() + ".");
+                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row - i][column].getBoat().getName() + ".");
                             break;
                         }
                     }
@@ -356,7 +356,7 @@ public class Computer implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row][column + i].getBoat() != null && this.defenseGrid.getBoard()[row][column + i].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlapse with your " + this.defenseGrid.getBoard()[row][column + i].getBoat().getName() + ".");
+                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row][column + i].getBoat().getName() + ".");
                             break;
                         }
                     }
@@ -372,7 +372,7 @@ public class Computer implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row + i][column].getBoat() != null && this.defenseGrid.getBoard()[row + i][column].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlapse with your " + this.defenseGrid.getBoard()[row + i][column].getBoat().getName() + ".");
+                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row + i][column].getBoat().getName() + ".");
                             break;
                         }
                     }
@@ -387,7 +387,7 @@ public class Computer implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row][column - i].getBoat() != null && this.defenseGrid.getBoard()[row][column - i].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlapse with your " + this.defenseGrid.getBoard()[row][column - i].getBoat().getName() + ".");
+                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row][column - i].getBoat().getName() + ".");
                             break;
                         }
                     }

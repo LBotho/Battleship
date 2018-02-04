@@ -24,10 +24,10 @@ public class Human implements Player {
 
     public Human() {
         boatsList.add(new Carrier(5,2));
-//        boatsList.add(new Cruiser(4,2));
-//        boatsList.add(new Destroyer(3,2));
-//        boatsList.add(new Submarine(3,4));
-//        boatsList.add(new Torpedo(2,5));
+        boatsList.add(new Cruiser(4,2));
+        boatsList.add(new Destroyer(3,2));
+        boatsList.add(new Submarine(3,4));
+        boatsList.add(new Torpedo(2,5));
     }
 
     /**
@@ -70,7 +70,7 @@ public class Human implements Player {
     }
 
     /**
-     * Check if the boat position is valid and if there's no overlapse with other boats.
+     * Check if the boat position is valid and if there's no overlap with other boats.
      *
      * @param row The row the user chose to place the boat start Square.
      * @param column The row the user chose to place the boat start Square.
@@ -93,7 +93,7 @@ public class Human implements Player {
                 for (int i=0; i<boatSize;i++) {
                     if(this.defenseGrid.getBoard()[row-i][column].getBoat() != null) {
                         check = false;
-                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row-i][column].getBoat().getName()+".");
+                        System.out.println("There is a boat overlap with your "+this.defenseGrid.getBoard()[row-i][column].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -108,7 +108,7 @@ public class Human implements Player {
                 for (int i=0; i<boatSize;i++) {
                     if(this.defenseGrid.getBoard()[row][column+i].getBoat() != null) {
                         check = false;
-                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row][column+i].getBoat().getName()+".");
+                        System.out.println("There is a boat overlap with your "+this.defenseGrid.getBoard()[row][column+i].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -123,7 +123,7 @@ public class Human implements Player {
                 for (int i=0; i<boatSize;i++) {
                     if(this.defenseGrid.getBoard()[row+i][column].getBoat() != null) {
                         check = false;
-                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row+i][column].getBoat().getName()+".");
+                        System.out.println("There is a boat overlap with your "+this.defenseGrid.getBoard()[row+i][column].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -144,7 +144,7 @@ public class Human implements Player {
                 for (int i=0; i<boatSize;i++) {
                     if(this.defenseGrid.getBoard()[row][column-i].getBoat() != null) {
                         check = false;
-                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row][column-i].getBoat().getName()+".");
+                        System.out.println("There is a boat overlap with your "+this.defenseGrid.getBoard()[row][column-i].getBoat().getName()+".");
                         break;
                     }
                 }
@@ -214,7 +214,7 @@ public class Human implements Player {
                 }
                 break;
         }
-        if(check != false) {
+        if(check) {
             switch (boatDir) {
                 case NORTH:
                     if (row - boatSize >= 0) {
@@ -226,7 +226,7 @@ public class Human implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row - i][column].getBoat() != null && this.defenseGrid.getBoard()[row - i][column].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlapse with your " + this.defenseGrid.getBoard()[row - i][column].getBoat().getName() + ".");
+                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row - i][column].getBoat().getName() + ".");
                             break;
                         }
                     }
@@ -241,7 +241,7 @@ public class Human implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row][column + i].getBoat() != null && this.defenseGrid.getBoard()[row][column + i].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlapse with your " + this.defenseGrid.getBoard()[row][column + i].getBoat().getName() + ".");
+                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row][column + i].getBoat().getName() + ".");
                             break;
                         }
                     }
@@ -257,7 +257,7 @@ public class Human implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row + i][column].getBoat() != null && this.defenseGrid.getBoard()[row + i][column].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlapse with your " + this.defenseGrid.getBoard()[row + i][column].getBoat().getName() + ".");
+                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row + i][column].getBoat().getName() + ".");
                             break;
                         }
                     }
@@ -272,7 +272,7 @@ public class Human implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row][column - i].getBoat() != null && this.defenseGrid.getBoard()[row][column - i].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlapse with your " + this.defenseGrid.getBoard()[row][column - i].getBoat().getName() + ".");
+                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row][column - i].getBoat().getName() + ".");
                             break;
                         }
                     }
