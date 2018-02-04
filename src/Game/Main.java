@@ -9,7 +9,7 @@ public class Main {
         Boolean player2Human = player2Choice();
         Game game = new Game(player2Human);
         game.init();
-//        game.play();
+        game.play();
     }
 
     private static Boolean player2Choice () {

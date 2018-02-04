@@ -25,6 +25,11 @@ public class Human implements Player {
     }
 
     @Override
+    public List<Boat> getBoatsList() {
+        return this.boatsList;
+    }
+
+    @Override
     public void placeBoats() {
         String choice;
         Direction direction;
@@ -47,63 +52,6 @@ public class Human implements Player {
             defenseGrid.addBoat(boat);
             defenseGrid.displayGrid();
         }
-    }
-
-    @Override
-    public List<Boat> getBoatsList() {
-        return this.boatsList;
-    }
-
-    @Override
-    public Case pickTarget() {
-        List<Case> targets = getTargets();
-        attackGrid.clearPreviousTarget();
-        for (Case target: targets) { attackGrid.addTarget(target); }
-        showBothGrid();
-        System.out.println("What target do you want to fire ?");
-        Case targetChoice;
-        do {
-            String choice = readChoice("[A-J]{1},([1-9]|10)");
-            int row = Functions.charToIntPosition(choice.split(",")[0]);
-            int column = Integer.valueOf(choice.split(",")[1]);
-            targetChoice = new Case(row,column);
-            if (!Functions.containsTarget(targets,targetChoice)) System.out.println("Error: the target you selected is not valid.\nPlease try again.");
-        } while (!Functions.containsTarget(targets,targetChoice));
-        return targetChoice;
-    }
-
-    @Override
-    public int hit(Case target) {
-        Boat boat = defenseGrid.getBoard()[target.getRow()][target.getColumn()].getBoat();
-        Boolean alreadyHit = defenseGrid.getBoard()[target.getRow()][target.getColumn()].isHasBeenHit();
-        if (boat != null && !alreadyHit) {
-
-            boat.damage();
-            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setHasBeenHit(true);
-            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
-            if (boat.getHealth() == 0) {
-                defenseGrid.removeBoat(boat);
-                System.out.println("Well played, you sank your opponent's "+boat.getName()+"!");
-                return 2;
-            }
-            System.out.println("Nice, you hit one of your opponent's boats!");
-            return 1;
-        }
-        System.out.println("You missed!");
-        return 0;
-    }
-
-    private String readChoice(String regex) {
-        Scanner reader = new Scanner(System.in);
-        String input = reader.nextLine();
-        Pattern ptn = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-        while (!ptn.matcher(input).matches()) {
-            System.out.println("Format error.");
-            System.out.println("Please try again.");
-            reader = new Scanner(System.in);
-            input = reader.nextLine();
-        }
-        return input;
     }
 
     @Override
@@ -174,29 +122,42 @@ public class Human implements Player {
         return check;
     }
 
-    private List<Case> getTargets() {
-        List<Case> targets = new ArrayList<>();
-        for (int row = 1; row < defenseGrid.getSize(); row++) {
-            for (int column = 1; column < defenseGrid.getSize(); column++) {
-                if (defenseGrid.getBoard()[row][column].getBoat() != null) {
-                    int range = defenseGrid.getBoard()[row][column].getBoat().getRange();
-                    targets.add(defenseGrid.getBoard()[row][column]);
-                    for(int k=1;k<=range; k++) {
-                        //We check every time if the potential target isn't out of the grid
-                        //We don't check duplicate because it won't matter at the end
-                        //North
-                        if(row-k > 0) targets.add(defenseGrid.getBoard()[row-k][column]);
-                        //East
-                        if(column+k <= 10) targets.add(defenseGrid.getBoard()[row][column+k]);
-                        //South
-                        if(row+k <= 10) targets.add(defenseGrid.getBoard()[row+k][column]);
-                        //West
-                        if(column-k > 0) targets.add(defenseGrid.getBoard()[row][column-k]);
-                    }
-                }
+    @Override
+    public Case pickTarget() {
+        List<Case> targets = getTargets();
+        attackGrid.clearPreviousTarget();
+        for (Case target: targets) { attackGrid.addTarget(target); }
+        showBothGrid();
+        System.out.println("What target do you want to fire ?");
+        Case targetChoice;
+        do {
+            String choice = readChoice("[A-J]{1},([1-9]|10)");
+            int row = Functions.charToIntPosition(choice.split(",")[0]);
+            int column = Integer.valueOf(choice.split(",")[1]);
+            targetChoice = new Case(row,column);
+            if (!Functions.containsTarget(targets,targetChoice)) System.out.println("Error: the target you selected is not valid.\nPlease try again.");
+        } while (!Functions.containsTarget(targets,targetChoice));
+        return targetChoice;
+    }
+
+    @Override
+    public int hit(Case target) {
+        Boat boat = defenseGrid.getBoard()[target.getRow()][target.getColumn()].getBoat();
+        Boolean alreadyHit = defenseGrid.getBoard()[target.getRow()][target.getColumn()].isHasBeenHit();
+        if (boat != null && !alreadyHit) {
+            boat.damage();
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setHasBeenHit(true);
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
+            if (boat.getHealth() == 0) {
+                defenseGrid.removeBoat(boat);
+                System.out.println(boat.getName()+" sank!");
+                return 2;
             }
+            System.out.println("Hit!");
+            return 1;
         }
-        return targets;
+        System.out.println("Miss!");
+        return 0;
     }
 
     @Override
@@ -261,6 +222,58 @@ public class Human implements Player {
         }
     }
 
+    @Override
+    public boolean lost() {
+        int totalHealth = 0;
+        for(Boat boat : boatsList) {
+            totalHealth+=boat.getHealth();
+        }
+        return (totalHealth == 0 ? true : false);
+    }
+
+    @Override
+    public void noticeHit(Case target) {
+        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
+    }
+
+    private String readChoice(String regex) {
+        Scanner reader = new Scanner(System.in);
+        String input = reader.nextLine();
+        Pattern ptn = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        while (!ptn.matcher(input).matches()) {
+            System.out.println("Format error.");
+            System.out.println("Please try again.");
+            reader = new Scanner(System.in);
+            input = reader.nextLine();
+        }
+        return input;
+    }
+
+    private List<Case> getTargets() {
+        List<Case> targets = new ArrayList<>();
+        for (int row = 1; row < defenseGrid.getSize(); row++) {
+            for (int column = 1; column < defenseGrid.getSize(); column++) {
+                if (defenseGrid.getBoard()[row][column].getBoat() != null) {
+                    int range = defenseGrid.getBoard()[row][column].getBoat().getRange();
+                    targets.add(defenseGrid.getBoard()[row][column]);
+                    for(int k=1;k<=range; k++) {
+                        //We check every time if the potential target isn't out of the grid
+                        //We don't check duplicate because it won't matter at the end
+                        //North
+                        if(row-k > 0) targets.add(defenseGrid.getBoard()[row-k][column]);
+                        //East
+                        if(column+k <= 10) targets.add(defenseGrid.getBoard()[row][column+k]);
+                        //South
+                        if(row+k <= 10) targets.add(defenseGrid.getBoard()[row+k][column]);
+                        //West
+                        if(column-k > 0) targets.add(defenseGrid.getBoard()[row][column-k]);
+                    }
+                }
+            }
+        }
+        return targets;
+    }
+
     private void showBothGrid() {
         //Same for both grid
         System.out.println("           Defense grid                        Attack grid");
@@ -277,19 +290,4 @@ public class Human implements Player {
             System.out.println("");
         }
     }
-
-    @Override
-    public boolean lost() {
-        int totalHealth = 0;
-        for(Boat boat : boatsList) {
-            totalHealth+=boat.getHealth();
-        }
-        return (totalHealth == 0);
-    }
-
-    public void noticeHit(Case target) {
-        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
-    }
-
-
 }

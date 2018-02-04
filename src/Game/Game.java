@@ -28,18 +28,14 @@ public class Game {
 
     public void play() {
         int player1Shot=0,player2Shot=0;
-        int round = 0;
+        int round = 1;
         while (true) {
-            System.out.println("##################### Round "+round+" ####################");
-            System.out.println();
-
+            //PLAYER 1
             System.out.println("\n##################################################");
-            System.out.println("#                    PLAYER 1                    #");
+            System.out.println("#                ROUND "+round+": PLAYER 1               #");
             System.out.println("##################################################\n");
 
-            if (player2Shot == 0 && round > 0) {
-                player1.moveBoat();
-            }
+            if (player2Shot == 0 && round > 1) player1.moveBoat();
             Case target1 = player1.pickTarget();
             player1Shot = player2.hit(target1);
             //If player 1 hit player 2 we notice it on the attack grid of player 1
@@ -52,10 +48,11 @@ public class Game {
                 break;
             }
 
+            //PLAYER 2
             System.out.println("\n##################################################");
-            System.out.println("#                    PLAYER 2                    #");
+            System.out.println("#                ROUND "+round+": PLAYER 2               #");
             System.out.println("##################################################\n");
-            if (player1Shot == 0) player2.moveBoat();
+            if (player1Shot == 0 && round > 1) player2.moveBoat();
 
             Case target2 = player2.pickTarget();
             player2Shot = player1.hit(target2);
@@ -65,7 +62,6 @@ public class Game {
                 System.out.println("##################################################\n");
                 break;
             }
-
 
             round++;
         }

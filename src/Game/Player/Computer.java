@@ -13,6 +13,7 @@ public class Computer implements Player {
     private Grid attackGrid = new Grid();
     private Grid defenseGrid = new Grid();
     private List<Boat> boatsList = new ArrayList<>();
+    private Random randomGenerator = new Random();
 
     public Computer() {
         boatsList.add(new Carrier(5,2));
@@ -23,16 +24,20 @@ public class Computer implements Player {
     }
 
     @Override
+    public List<Boat> getBoatsList() {
+        return this.boatsList;
+    }
+
+    @Override
     public void placeBoats() {
         Direction direction;
-        int max=10,min=1;
         int row,column;
         for (Boat boat : boatsList) {
-            Boolean check = false;
+            Boolean check;
             do {
-                Random rand = new Random();
-                row = rand.nextInt(max - min + 1) + min;
-                column = rand.nextInt(max - min + 1) + min;
+                int min = 1,max = 10;
+                row = randomGenerator.nextInt(max - min + 1) + min;
+                column = randomGenerator.nextInt(max - min + 1) + min;
                 direction = Direction.randomDirection();
                 check = checkBoatPosition(row,column,direction,boat.getSize());
             } while (!check);
@@ -41,27 +46,9 @@ public class Computer implements Player {
             boat.setPosition(new Case(row,column));
             defenseGrid.addBoat(boat);
         }
-    }
-
-    @Override
-    public void moveBoat() {
-
-    }
-
-    @Override
-    public List<Boat> getBoatsList() {
-        return this.boatsList;
-    }
-
-    @Override
-    public Case pickTarget() {
-        Case targetChoice = new Case(0,0);
-        return targetChoice;
-    }
-
-    @Override
-    public int hit(Case target) {
-        return 0;
+        System.out.println("\n##################################################");
+        System.out.println("#          PLAYER 2 BOATS PLACEMENT OK           #");
+        System.out.println("##################################################");
     }
 
     @Override
@@ -128,11 +115,81 @@ public class Computer implements Player {
         return check;
     }
 
-    public boolean lost(){
-        return true;
+    @Override
+    public Case pickTarget() {
+        List<Case> targets = getTargets();
+        attackGrid.clearPreviousTarget();
+        int index = randomGenerator.nextInt(targets.size());
+        Case targetChoice = targets.get(index);
+        for (Case target: targets) {
+            attackGrid.addTarget(target);
+        }
+        return targetChoice;
     }
 
+    @Override
+    public int hit(Case target) {
+        Boat boat = defenseGrid.getBoard()[target.getRow()][target.getColumn()].getBoat();
+        Boolean alreadyHit = defenseGrid.getBoard()[target.getRow()][target.getColumn()].isHasBeenHit();
+        if (boat != null && !alreadyHit) {
+            boat.damage();
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setHasBeenHit(true);
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
+            if (boat.getHealth() == 0) {
+                defenseGrid.removeBoat(boat);
+                System.out.println(boat.getName()+" sank!");
+                return 2;
+            }
+            System.out.println("Hit!");
+            return 1;
+        }
+        System.out.println("Miss!");
+        return 0;
+    }
+
+    @Override
+    public void moveBoat() {
+
+    }
+
+    @Override
+    public boolean lost() {
+        int totalHealth = 0;
+        for(Boat boat : boatsList) {
+            totalHealth+=boat.getHealth();
+        }
+        return (totalHealth == 0 ? true : false);
+    }
+
+    @Override
     public void noticeHit(Case target) {
-
+        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
     }
+
+    private List<Case> getTargets() {
+        List<Case> targets = new ArrayList<>();
+        for (int row = 1; row < defenseGrid.getSize(); row++) {
+            for (int column = 1; column < defenseGrid.getSize(); column++) {
+                if (defenseGrid.getBoard()[row][column].getBoat() != null) {
+                    int range = defenseGrid.getBoard()[row][column].getBoat().getRange();
+                    targets.add(defenseGrid.getBoard()[row][column]);
+                    for(int k=1;k<=range; k++) {
+                        //We check every time if the potential target isn't out of the grid
+                        //We don't check duplicate because it won't matter at the end
+                        //North
+                        if(row-k > 0) targets.add(defenseGrid.getBoard()[row-k][column]);
+                        //East
+                        if(column+k <= 10) targets.add(defenseGrid.getBoard()[row][column+k]);
+                        //South
+                        if(row+k <= 10) targets.add(defenseGrid.getBoard()[row+k][column]);
+                        //West
+                        if(column-k > 0) targets.add(defenseGrid.getBoard()[row][column-k]);
+                    }
+                }
+            }
+        }
+        return targets;
+    }
+
+
 }
