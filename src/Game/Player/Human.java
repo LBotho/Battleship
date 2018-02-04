@@ -18,7 +18,7 @@ public class Human implements Player {
 
     public Human() {
         boatsList.add(new Carrier(5,2));
-      //  boatsList.add(new Cruiser(4,2));
+//        boatsList.add(new Cruiser(4,2));
       //  boatsList.add(new Destroyer(3,2));
       //  boatsList.add(new Submarine(3,4));
       //  boatsList.add(new Torpedo(2,5));

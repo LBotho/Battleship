@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Computer implements Player {
-
-    private List<Boat> boatsList = new ArrayList<>();
     private Grid attackGrid = new Grid();
     private Grid defenseGrid = new Grid();
+    private List<Boat> boatsList = new ArrayList<>();
 
     public Computer() {
         boatsList.add(new Carrier(5,2));
