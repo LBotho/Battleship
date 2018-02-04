@@ -168,14 +168,10 @@ public class Human implements Player {
         switch (dirToMove) {
             case NORTH:
                 if (row < 1) {
-                    System.out.println("#5");
-
                     check = false;
                     break;
                 }
                 if(boatDir == Direction.NORTH && row-boatSize < 1) {
-                    System.out.println("#6");
-
                     check = false;
                     break;
                 }
@@ -183,16 +179,11 @@ public class Human implements Player {
                 break;
 
             case EAST:
-                System.out.println(column);
                 if (column > 10) {
-                    System.out.println("#7");
-
                     check = false;
                     break;
                 }
                 if(boatDir == Direction.EAST && column+boatSize > 11) {
-                    System.out.println("#8");
-
                     check = false;
                     break;
                 }
@@ -200,15 +191,10 @@ public class Human implements Player {
                 break;
             case SOUTH:
                 if (row > 10) {
-                    System.out.println("#9");
-
                     check = false;
-
                     break;
                 }
                 if(boatDir == Direction.SOUTH && row+boatSize > 11) {
-                    System.out.println("#10");
-
                     check = false;
                     break;
                 }
@@ -218,14 +204,10 @@ public class Human implements Player {
                 break;
             case WEST:
                 if (column < 1) {
-                    System.out.println("#11");
-
                     check = false;
                     break;
                 }
                 if(boatDir == Direction.WEST && column-boatSize < 1) {
-                    System.out.println("#12");
-
                     check = false;
                     break;
                 }
@@ -237,7 +219,6 @@ public class Human implements Player {
                     if (row - boatSize >= 0) {
 
                     } else {
-                        System.out.println("#1");
                         check = false;
                         break;
                     }
@@ -253,8 +234,6 @@ public class Human implements Player {
                     if (column + boatSize <= 11) {
 
                     } else {
-                        System.out.println("#2");
-
                         check = false;
                         break;
                     }
@@ -270,7 +249,6 @@ public class Human implements Player {
                     if (row + boatSize <= 11) {
 
                     } else {
-                        System.out.println("#3");
                         check = false;
                         break;
                     }
@@ -287,8 +265,6 @@ public class Human implements Player {
                     if (column - boatSize > 0) {
 
                     } else {
-                        System.out.println("#4");
-
                         check = false;
                         break;
                     }
