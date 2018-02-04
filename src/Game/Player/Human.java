@@ -106,7 +106,8 @@ public class Human implements Player {
         return input;
     }
 
-    private Boolean checkBoatPosition(int row, int column, Direction direction, int boatSize) {
+    @Override
+    public boolean checkBoatPosition(int row, int column, Direction direction, int boatSize) {
         Boolean check = false;
         switch (direction) {
             case NORTH:
