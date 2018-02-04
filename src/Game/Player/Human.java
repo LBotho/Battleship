@@ -123,6 +123,77 @@ public class Human implements Player {
     }
 
     @Override
+    public boolean checkMoveBoat(int row, int column, Boat boatToMove) {
+        Direction direction = boatToMove.getDirection();
+        int boatSize  = boatToMove.getSize();
+
+        Boolean check = false;
+        switch (direction) {
+            case NORTH:
+                if (row-boatSize >= 0) {
+                    check = true;
+                } else {
+                    check = false;
+                    break;
+                }
+                for (int i=0; i<boatSize;i++) {
+                    if(this.defenseGrid.getBoard()[row-i][column].getBoat() != null && this.defenseGrid.getBoard()[row-i][column].getBoat() != boatToMove) {
+                        check = false;
+                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row-i][column].getBoat().getName()+".");
+                        break;
+                    }
+                }
+                break;
+            case EAST:
+                if (column+boatSize <= 11) {
+                    check = true;
+                } else {
+                    check = false;
+                    break;
+                }
+                for (int i=0; i<boatSize;i++) {
+                    if(this.defenseGrid.getBoard()[row][column+i].getBoat() != null && this.defenseGrid.getBoard()[row][column+i].getBoat() != boatToMove) {
+                        check = false;
+                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row][column+i].getBoat().getName()+".");
+                        break;
+                    }
+                }
+                break;
+            case SOUTH:
+                if (row+boatSize <= 11) {
+                    check = true;
+                } else {
+                    check = false;
+                    break;
+                }
+                for (int i=0; i<boatSize;i++) {
+                    if(this.defenseGrid.getBoard()[row+i][column].getBoat() != null && this.defenseGrid.getBoard()[row+i][column].getBoat() != boatToMove) {
+                        check = false;
+                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row+i][column].getBoat().getName()+".");
+                        break;
+                    }
+                }
+                break;
+            case WEST:
+                if (column-boatSize >= 0) {
+                    check = true;
+                } else {
+                    check = false;
+                    break;
+                }
+                for (int i=0; i<boatSize;i++) {
+                    if(this.defenseGrid.getBoard()[row][column-i].getBoat() != null && this.defenseGrid.getBoard()[row][column-i].getBoat() != boatToMove) {
+                        check = false;
+                        System.out.println("There is a boat overlapse with your "+this.defenseGrid.getBoard()[row][column-i].getBoat().getName()+".");
+                        break;
+                    }
+                }
+                break;
+        }
+        return check;
+    }
+
+    @Override
     public Case pickTarget() {
         List<Case> targets = getTargets();
         attackGrid.clearPreviousTarget();
@@ -210,7 +281,7 @@ public class Human implements Player {
                         break;
                 }
 
-                check = checkBoatPosition(newRow,newColumn,boatToMove.getDirection(),boatToMove.getSize());
+                check = checkMoveBoat(newRow,newColumn,boatToMove);
                 if (!check) System.out.println("Placement error.\nPlease try again.");
             } while (!check);
             removedBoat = defenseGrid.removeBoat(boatToMove);

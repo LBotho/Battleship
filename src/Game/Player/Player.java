@@ -10,6 +10,8 @@ public interface Player {
     List<Boat> getBoatsList();
     void placeBoats();
     boolean checkBoatPosition(int row, int column, Direction direction, int boatSize);
+    boolean checkMoveBoat(int row, int column,Boat boat);
+
     Case pickTarget();
     int hit(Case target);
     void moveBoat();
