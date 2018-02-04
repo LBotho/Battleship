@@ -22,6 +22,14 @@ public class Case {
         this.illustration = illustration;
     }
 
+    public Case(int row, int column, String illustration, boolean hasBeenHit, Boat boat) {
+        this.row = row;
+        this.column = column;
+        this.boat = boat;
+        this.illustration = illustration;
+        this.hasBeenHit = hasBeenHit;
+    }
+
     public Boat getBoat() {
         return boat;
     }

@@ -31,7 +31,7 @@ public class Human implements Player {
         int row,column;
         System.out.println("\nYou have 5 boats to place: 1 Carrier, 1 Torpedo, 1 Cruiser, 1 Submarine and 1 Destroyer.\nTo place a boat, you have to write a square where to place the stern of the boat and a direction for the boat.\nFormat example (case insensitive): B,6,EAST");
         for (Boat boat : boatsList) {
-            Boolean check = false;
+            Boolean check;
             System.out.println("Where do you want to place your "+boat.getName()+" (size="+boat.getSize()+") ?");
             do {
                 choice = readChoice("([A-J]{1}),([1-9]|10),(NORTH|WEST|SOUTH|EAST)");
@@ -61,7 +61,7 @@ public class Human implements Player {
         for (Case target: targets) { attackGrid.addTarget(target); }
         showBothGrid();
         System.out.println("What target do you want to fire ?");
-        Case targetChoice = null;
+        Case targetChoice;
         do {
             String choice = readChoice("[A-J]{1},([1-9]|10)");
             int row = Functions.charToIntPosition(choice.split(",")[0]);
@@ -214,14 +214,14 @@ public class Human implements Player {
 
             System.out.println("Select the boat you want to move and the number of move \"Boat number,(NORTH|WEST|SOUTH|EAST),number of move\"");
 
-            Boolean check = false;
+            Boolean check;
             int nbBoatToMove;
             Direction dirToMove;
             int nbOfMove;
             Boat boatToMove;
             int newRow = 0;
             int newColumn = 0;
-
+            List<Case> removedBoat;
             do {
                 String choiceBoat = readChoice("[0-"+nbOfBoat+"],(NORTH|WEST|SOUTH|EAST),[1-2]");
                 nbBoatToMove = Integer.parseInt(choiceBoat.split(",")[0]);
@@ -248,16 +248,16 @@ public class Human implements Player {
                         newColumn = boatToMove.getPosition().getColumn()+nbOfMove;
                         break;
                 }
-                defenseGrid.removeBoat(boatToMove);
+
                 check = checkBoatPosition(newRow,newColumn,boatToMove.getDirection(),boatToMove.getSize());
                 if (!check) System.out.println("Placement error.\nPlease try again.");
             } while (!check);
-
+            removedBoat = defenseGrid.removeBoat(boatToMove);
             boatToMove.setPosition(new Case(newRow, newColumn));
-            defenseGrid.addBoat(boatToMove);
+            defenseGrid.moveBoat(removedBoat, dirToMove, nbOfMove, boatToMove);
 
         } else if (choice.equalsIgnoreCase("no")) {
-            return;
+
         }
     }
 
@@ -284,7 +284,7 @@ public class Human implements Player {
         for(Boat boat : boatsList) {
             totalHealth+=boat.getHealth();
         }
-        return (totalHealth == 0 ? true : false);
+        return (totalHealth == 0);
     }
 
     public void noticeHit(Case target) {

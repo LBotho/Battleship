@@ -3,6 +3,8 @@ package Game.Boats;
 import Game.Grid.Case;
 import Game.utils.Direction;
 
+import java.util.ArrayList;
+
 abstract public class Boat {
     private Case position;
     private Direction direction;
