@@ -16,7 +16,7 @@ public class Game {
 
     /**
      * Game constructor
-     * @param player2Human The user game mode choice (true -> against a human, false -> against the computer).
+     * @param player2Human The user game mode choice (true: against a human, false: against the computer).
      */
     public Game(Boolean player2Human) {
         player1 = new Human();

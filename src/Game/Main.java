@@ -11,7 +11,8 @@ import java.util.regex.Pattern;
  */
 public class Main {
     /**
-     * Main function.
+     * Main function
+     * @param args
      */
     public static void main(String[] args) {
         Boolean player2Human = player2Choice();
