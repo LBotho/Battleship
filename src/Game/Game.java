@@ -72,6 +72,8 @@ public class Game {
 
             Square target2 = player2.pickTarget();
             player2Shot = player1.hit(target2);
+            if(player2Shot == 1) player2.noticeHit(target2);
+
             if(player1.lost()){
                 System.out.println("\n##################################################");
                 System.out.println("#                  PLAYER 2 WON                  #");
