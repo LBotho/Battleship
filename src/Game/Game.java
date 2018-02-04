@@ -32,34 +32,30 @@ public class Game {
             System.out.println("\n##################################################");
             System.out.println("#                    PLAYER 1                    #");
             System.out.println("##################################################\n");
-
             Case target1 = player1.pickTarget();
             player1Shot = player2.hit(target1);
 
             if(player2.lost()) {
-                System.out.print("Well done Player 1, you won !");
+                System.out.println("\n##################################################");
+                System.out.println("#                  PLAYER 1 WON                  #");
+                System.out.println("##################################################\n");
                 break;
             }
 
             System.out.println("\n##################################################");
             System.out.println("#                    PLAYER 2                    #");
             System.out.println("##################################################\n");
-
-            if (player1Shot == 0) {
-                player2.moveBoat();
-            }
+            if (player1Shot == 0) player2.moveBoat();
 
             Case target2 = player2.pickTarget();
             player2Shot = player1.hit(target2);
             if(player1.lost()){
-                System.out.print("Well done Player 2, you won !");
+                System.out.println("\n##################################################");
+                System.out.println("#                  PLAYER 2 WON                  #");
+                System.out.println("##################################################\n");
                 break;
             }
-
-            if (player2Shot == 0) {
-                player1.moveBoat();
-            }
-
+            if (player2Shot == 0) player1.moveBoat();
         }
     }
 }

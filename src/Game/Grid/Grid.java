@@ -93,13 +93,9 @@ public class Grid {
 
     }
 
-    public Case[][] getBoard() {
-        return board;
-    }
+    public Case[][] getBoard() { return board; }
 
-    public void addTarget(Case target) {
-        board[target.getRow()][target.getColumn()].setIllustration("o");
-    }
+    public void addTarget(Case target) { board[target.getRow()][target.getColumn()].setIllustration("o"); }
 
     public void clear() {
         for (int line = 0; line < size; line++) {
@@ -116,6 +112,5 @@ public class Grid {
                 }
             }
         }
-
     }
 }

@@ -2,7 +2,6 @@ package Game.Player;
 
 import Game.Boats.Boat;
 import Game.Grid.Case;
-import Game.Grid.Grid;
 
 import java.util.List;
 
@@ -13,5 +12,4 @@ public interface Player {
     int hit(Case target);
     void moveBoat();
     boolean lost();
-
 }

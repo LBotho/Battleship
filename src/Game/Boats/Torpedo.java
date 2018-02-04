@@ -1,9 +1,9 @@
 package Game.Boats;
 
 public class Torpedo extends Boat {
-    public Torpedo() {
-        setSize(2);
-        setRange(5);
+    public Torpedo(int size, int range) {
+        setSize(size);
+        setRange(range);
         setName("Torpedo");
     }
 }

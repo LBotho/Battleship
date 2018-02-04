@@ -1,10 +1,9 @@
 package Game.Boats;
 
 public class Cruiser extends Boat {
-
-    public Cruiser () {
-        setSize(4);
-        setRange(2);
+    public Cruiser (int size, int range) {
+        setSize(size);
+        setRange(range);
         setName("Cruiser");
     }
 }

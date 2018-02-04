@@ -17,11 +17,11 @@ public class Human implements Player {
     private List<Boat> boatsList = new ArrayList<>();
 
     public Human() {
-        boatsList.add(new Carrier());
-//        boatsList.add(new Cruiser());
-//        boatsList.add(new Destroyer());
-//        boatsList.add(new Submarine());
-//        boatsList.add(new Torpedo());
+        boatsList.add(new Carrier(5,2));
+      //  boatsList.add(new Cruiser(4,2));
+      //  boatsList.add(new Destroyer(3,2));
+      //  boatsList.add(new Submarine(3,4));
+      //  boatsList.add(new Torpedo(2,5));
     }
 
     @Override
@@ -179,13 +179,13 @@ public class Human implements Player {
                     for(int k=1;k<=range; k++) {
                         //We check every time if the potential target isn't out of the grid
                         //We don't check duplicate because it won't matter at the end
-                        //north
+                        //North
                         if(row-k > 0) targets.add(defenseGrid.getBoard()[row-k][column]);
-                        //east
+                        //East
                         if(column+k <= 10) targets.add(defenseGrid.getBoard()[row][column+k]);
-                        //south
+                        //South
                         if(row+k <= 10) targets.add(defenseGrid.getBoard()[row+k][column]);
-                        //west
+                        //West
                         if(column-k > 0) targets.add(defenseGrid.getBoard()[row][column-k]);
                     }
                 }
@@ -256,7 +256,7 @@ public class Human implements Player {
         }
     }
 
-    public void showBothGrid() {
+    private void showBothGrid() {
         //Same for both grid
         System.out.println("           Defense grid                        Attack grid");
         int gridSize = attackGrid.getSize();

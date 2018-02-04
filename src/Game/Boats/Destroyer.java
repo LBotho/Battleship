@@ -1,9 +1,9 @@
 package Game.Boats;
 
 public class Destroyer extends Boat {
-    public Destroyer() {
-        setSize(3);
-        setRange(2);
+    public Destroyer(int size, int range) {
+        setSize(size);
+        setRange(range);
         setName("Destroyer");
     }
 }

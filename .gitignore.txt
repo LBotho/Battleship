@@ -1,0 +1,4 @@
+out/
+.idea/
+Battleship.iml
+Battleship.pdf

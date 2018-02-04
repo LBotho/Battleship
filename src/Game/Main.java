@@ -10,7 +10,6 @@ public class Main {
         Game game = new Game(player2Human);
         game.init();
         game.play();
-
     }
 
     private static Boolean player2Choice () {
@@ -35,7 +34,6 @@ public class Main {
             input = reader.nextLine();
         }
 
-//        String input = "1";
         switch (input) {
             case "1":
                 player2Human = true;

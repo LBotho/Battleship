@@ -1,9 +1,9 @@
 package Game.Boats;
 
 public class Carrier extends Boat {
-    public Carrier() {
-        setSize(5);
-        setRange(2);
+    public Carrier(int size, int range) {
+        setSize(size);
+        setRange(range);
         setName("Carrier");
     }
 }

@@ -14,12 +14,11 @@ public class Computer implements Player {
     private Grid defenseGrid = new Grid();
 
     public Computer() {
-        System.out.println("Constructeur computer");
-        boatsList.add(new Carrier());
-        boatsList.add(new Cruiser());
-        boatsList.add(new Destroyer());
-        boatsList.add(new Submarine());
-        boatsList.add(new Torpedo());
+        boatsList.add(new Carrier(5,2));
+        //  boatsList.add(new Cruiser(4,2));
+        //  boatsList.add(new Destroyer(3,2));
+        //  boatsList.add(new Submarine(3,4));
+        //  boatsList.add(new Torpedo(2,5));
     }
 
     @Override

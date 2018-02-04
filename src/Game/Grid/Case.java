@@ -5,23 +5,6 @@ import Game.Boats.Boat;
 public class Case {
     private int row;
     private int column;
-
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public int getColumn() {
-        return column;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
-    }
-
     private Boat boat;
     private String illustration;
 
@@ -38,19 +21,19 @@ public class Case {
         this.illustration = illustration;
     }
 
-    public Boat getBoat() {
-        return boat;
-    }
+    public int getRow() { return row; }
 
-    public void setBoat(Boat boat) {
-        this.boat = boat;
-    }
+    public void setRow(int row) { this.row = row; }
 
-    public String getIllustration() {
-        return illustration;
-    }
+    public int getColumn() { return column; }
 
-    public void setIllustration(String illustration) {
-        this.illustration = illustration;
-    }
+    public void setColumn(int column) { this.column = column; }
+
+    public Boat getBoat() { return boat; }
+
+    public void setBoat(Boat boat) { this.boat = boat; }
+
+    public String getIllustration() { return illustration; }
+
+    public void setIllustration(String illustration) { this.illustration = illustration; }
 }
