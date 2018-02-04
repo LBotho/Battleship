@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 /**
  * Main class.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public class Main {
     /**

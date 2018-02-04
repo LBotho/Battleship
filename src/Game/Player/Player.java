@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * Player interface.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public interface Player {
     List<Boat> getBoatsList();

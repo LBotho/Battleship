@@ -12,7 +12,8 @@ import java.util.Random;
 /**
  * Computer class.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public class Computer implements Player {
     private Grid attackGrid = new Grid();

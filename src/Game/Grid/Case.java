@@ -5,7 +5,8 @@ import Game.Boats.Boat;
 /**
  * Case class.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public class Case {
     private int row;

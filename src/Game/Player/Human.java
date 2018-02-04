@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
 /**
  * Human class.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public class Human implements Player {
     private Grid attackGrid = new Grid();

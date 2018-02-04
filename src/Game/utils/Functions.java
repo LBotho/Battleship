@@ -8,7 +8,8 @@ import java.util.List;
  * Functions class.
  * Contains all the "tools" functions we need.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public class Functions {
     /**

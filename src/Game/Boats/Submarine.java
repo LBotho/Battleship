@@ -3,7 +3,8 @@ package Game.Boats;
 /**
  * Submarine class.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public class Submarine extends Boat {
     /**

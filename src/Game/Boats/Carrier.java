@@ -3,7 +3,8 @@ package Game.Boats;
 /**
  * Carrier class.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public class Carrier extends Boat {
     /**

@@ -6,7 +6,8 @@ import Game.utils.Direction;
 /**
  * Boat class.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 abstract public class Boat {
     private Case position;

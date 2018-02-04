@@ -8,7 +8,8 @@ import java.util.Random;
 /**
  * Direction enum that represents the Cardinal directions.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public enum Direction {
     NORTH,

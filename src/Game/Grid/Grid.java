@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * Grid class.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public class Grid {
     private final int size=11;

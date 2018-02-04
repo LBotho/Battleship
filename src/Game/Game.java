@@ -8,7 +8,8 @@ import Game.Player.Player;
 /**
  * Game class.
  *
- * @author Loïc Bothorel & Paul Michaud
+ * @author Loic Bothorel
+ * @author Paul Michaud
  */
 public class Game {
     private Player player1, player2;
