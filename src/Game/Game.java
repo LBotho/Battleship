@@ -28,12 +28,22 @@ public class Game {
 
     public void play() {
         int player1Shot=0,player2Shot=0;
+        int round = 0;
         while (true) {
+            System.out.println("##################### Round "+round+" ####################");
+            System.out.println();
+
             System.out.println("\n##################################################");
             System.out.println("#                    PLAYER 1                    #");
             System.out.println("##################################################\n");
+
+            if (player2Shot == 0 && round > 0) {
+                player1.moveBoat();
+            }
             Case target1 = player1.pickTarget();
             player1Shot = player2.hit(target1);
+            //If player 1 hit player 2 we notice it on the attack grid of player 1
+            if(player1Shot == 1) player1.noticeHit(target1);
 
             if(player2.lost()) {
                 System.out.println("\n##################################################");
@@ -55,7 +65,9 @@ public class Game {
                 System.out.println("##################################################\n");
                 break;
             }
-            if (player2Shot == 0) player1.moveBoat();
+
+
+            round++;
         }
     }
 }

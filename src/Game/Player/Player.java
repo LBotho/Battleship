@@ -12,4 +12,6 @@ public interface Player {
     int hit(Case target);
     void moveBoat();
     boolean lost();
+    void noticeHit(Case target);
+
 }

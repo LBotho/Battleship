@@ -40,24 +40,30 @@ public class Grid {
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setBoat(boat);
                     board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setIllustration("x");
+                    board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setHasBeenHit(false);
                 }
                 break;
             case EAST:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setBoat(boat);
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setIllustration("x");
+                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setHasBeenHit(false);
                 }
                 break;
             case SOUTH:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setBoat(boat);
                     board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setIllustration("x");
+                    board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setHasBeenHit(false);
+
                 }
                 break;
             case WEST:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setBoat(boat);
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setIllustration("x");
+                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setHasBeenHit(false);
+
                 }
                 break;
         }
@@ -69,24 +75,32 @@ public class Grid {
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setBoat(null);
                     board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setIllustration(" ");
+                    board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setHasBeenHit(false);
+
                 }
                 break;
             case EAST:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setBoat(null);
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setIllustration(" ");
+                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setHasBeenHit(false);
+
                 }
                 break;
             case SOUTH:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setBoat(null);
                     board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setIllustration(" ");
+                    board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setHasBeenHit(false);
+
                 }
                 break;
             case WEST:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setBoat(null);
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setIllustration(" ");
+                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setHasBeenHit(false);
+
                 }
                 break;
         }
@@ -95,20 +109,24 @@ public class Grid {
 
     public Case[][] getBoard() { return board; }
 
-    public void addTarget(Case target) { board[target.getRow()][target.getColumn()].setIllustration("o"); }
+    public void addTarget(Case target) {
+        if(!board[target.getRow()][target.getColumn()].getIllustration().equals("#")) board[target.getRow()][target.getColumn()].setIllustration("o");
+    }
 
-    public void clear() {
+    public void clearPreviousTarget() {
         for (int line = 0; line < size; line++) {
             for (int column = 0; column < size; column++) {
                 if(line == 0 && column == 0) {
-                    this.board[line][column] = new Case(line,column," ");
+                    this.board[line][column].setIllustration(" ");
                 } else if (line == 0) {
-                    this.board[line][column] = new Case(line,column,Integer.toString(column));
+                    this.board[line][column].setIllustration(Integer.toString(column));
                 } else if (column == 0) {
                     int letterValue = line + 64;
-                    this.board[line][column] = new Case(line,column,Character.toString((char) letterValue));
+                    this.board[line][column].setIllustration(Character.toString((char) letterValue));
                 } else {
-                    this.board[line][column] = new Case(line,column," ");
+                    if(!this.board[line][column].getIllustration().equals("#")) {
+                        this.board[line][column].setIllustration(" ");
+                    }
                 }
             }
         }

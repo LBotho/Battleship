@@ -39,7 +39,6 @@ public class Computer implements Player {
     @Override
     public Case pickTarget() {
         Case targetChoice = new Case(0,0);
-
         return targetChoice;
     }
 
@@ -50,5 +49,9 @@ public class Computer implements Player {
 
     public boolean lost(){
         return true;
+    }
+
+    public void noticeHit(Case target) {
+
     }
 }

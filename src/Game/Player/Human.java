@@ -57,7 +57,7 @@ public class Human implements Player {
     @Override
     public Case pickTarget() {
         List<Case> targets = getTargets();
-        attackGrid.clear();
+        attackGrid.clearPreviousTarget();
         for (Case target: targets) { attackGrid.addTarget(target); }
         showBothGrid();
         System.out.println("What target do you want to fire ?");
@@ -75,8 +75,12 @@ public class Human implements Player {
     @Override
     public int hit(Case target) {
         Boat boat = defenseGrid.getBoard()[target.getRow()][target.getColumn()].getBoat();
-        if (boat != null) {
+        Boolean alreadyHit = defenseGrid.getBoard()[target.getRow()][target.getColumn()].isHasBeenHit();
+        if (boat != null && !alreadyHit) {
+
             boat.damage();
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setHasBeenHit(true);
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
             if (boat.getHealth() == 0) {
                 defenseGrid.removeBoat(boat);
                 System.out.println("Well played, you sank your opponent's "+boat.getName()+"!");
@@ -243,11 +247,11 @@ public class Human implements Player {
                         newColumn = boatToMove.getPosition().getColumn()+nbOfMove;
                         break;
                 }
+                defenseGrid.removeBoat(boatToMove);
                 check = checkBoatPosition(newRow,newColumn,boatToMove.getDirection(),boatToMove.getSize());
                 if (!check) System.out.println("Placement error.\nPlease try again.");
             } while (!check);
 
-            defenseGrid.removeBoat(boatToMove);
             boatToMove.setPosition(new Case(newRow, newColumn));
             defenseGrid.addBoat(boatToMove);
 
@@ -273,6 +277,7 @@ public class Human implements Player {
         }
     }
 
+    @Override
     public boolean lost() {
         int totalHealth = 0;
         for(Boat boat : boatsList) {
@@ -280,4 +285,10 @@ public class Human implements Player {
         }
         return (totalHealth == 0 ? true : false);
     }
+
+    public void noticeHit(Case target) {
+        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
+    }
+
+
 }
