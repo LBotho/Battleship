@@ -23,7 +23,8 @@ public enum Direction {
 
     /**
      * Get a random direction from the Enum.
-     * @return direction
+     *
+     * @return A random direction.
      */
     public static Direction randomDirection()  {
         return VALUES.get(RANDOM.nextInt(SIZE));

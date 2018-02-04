@@ -1,7 +1,7 @@
 package Game.Player;
 
 import Game.Boats.*;
-import Game.Grid.Case;
+import Game.Grid.Square;
 import Game.Grid.Grid;
 import Game.utils.Direction;
 import Game.utils.Functions;
@@ -22,9 +22,6 @@ public class Human implements Player {
     private Grid defenseGrid = new Grid();
     private List<Boat> boatsList = new ArrayList<>();
 
-    /**
-     * Human constructor
-     */
     public Human() {
         boatsList.add(new Carrier(5,2));
 //        boatsList.add(new Cruiser(4,2));
@@ -35,6 +32,7 @@ public class Human implements Player {
 
     /**
      * Get the player boats list.
+     *
      * @return The list of the player's boats
      */
     @Override
@@ -65,7 +63,7 @@ public class Human implements Player {
             } while (!check);
             //Init boat
             boat.setDirection(direction);
-            boat.setPosition(new Case(row,column));
+            boat.setPosition(new Square(row,column));
             defenseGrid.addBoat(boat);
             defenseGrid.displayGrid();
         }
@@ -73,10 +71,12 @@ public class Human implements Player {
 
     /**
      * Check if the boat position is valid and if there's no overlapse with other boats.
-     * @param row The row the user chose to place the boat start Case.
-     * @param column The row the user chose to place the boat start Case.
+     *
+     * @param row The row the user chose to place the boat start Square.
+     * @param column The row the user chose to place the boat start Square.
      * @param direction The direction of the boat.
      * @param boatSize The size of the boat.
+     *
      * @return True if the boat placement is valid and false if not.
      */
     @Override
@@ -158,7 +158,8 @@ public class Human implements Player {
      * @param row The row
      * @param column The column
      * @param boatToMove The boat to move.
-     * @return
+     *
+     * @return True if the move if valid, false if not.
      */
     @Override
     public boolean checkMoveBoat(int row, int column, Boat boatToMove, Direction dirToMove) {
@@ -285,21 +286,22 @@ public class Human implements Player {
 
     /**
      * Ask the user to choose a target.
+     *
      * @return The target the user chose.
      */
     @Override
-    public Case pickTarget() {
-        List<Case> targets = getTargets();
+    public Square pickTarget() {
+        List<Square> targets = getTargets();
         attackGrid.clearPreviousTarget();
-        for (Case target: targets) { attackGrid.addTarget(target); }
+        for (Square target: targets) { attackGrid.addTarget(target); }
         showBothGrid();
         System.out.println("What target do you want to fire ?");
-        Case targetChoice;
+        Square targetChoice;
         do {
             String choice = readChoice("[A-J]{1},([1-9]|10)");
             int row = Functions.charToIntPosition(choice.split(",")[0]);
             int column = Integer.valueOf(choice.split(",")[1]);
-            targetChoice = new Case(row,column);
+            targetChoice = new Square(row,column);
             if (!Functions.containsTarget(targets,targetChoice)) System.out.println("Error: the target you selected is not valid.\nPlease try again.");
         } while (!Functions.containsTarget(targets,targetChoice));
         return targetChoice;
@@ -311,13 +313,13 @@ public class Human implements Player {
      * @return 0 if 'miss', 1 if 'hit' or 2 if 'sink'
      */
     @Override
-    public int hit(Case target) {
+    public int hit(Square target) {
         Boat boat = defenseGrid.getBoard()[target.getRow()][target.getColumn()].getBoat();
         Boolean alreadyHit = defenseGrid.getBoard()[target.getRow()][target.getColumn()].isHasBeenHit();
         if (boat != null && !alreadyHit) {
             boat.damage();
             defenseGrid.getBoard()[target.getRow()][target.getColumn()].setHasBeenHit(true);
-            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("#");
             if (boat.getHealth() == 0) {
                 defenseGrid.removeBoat(boat);
                 System.out.println(boat.getName()+" sank!");
@@ -356,7 +358,7 @@ public class Human implements Player {
             Boat boatToMove;
             int newRow = 0;
             int newColumn = 0;
-            List<Case> removedBoat;
+            List<Square> removedBoat;
             do {
                 String choiceBoat = readChoice("[0-"+nbOfBoat+"],(NORTH|WEST|SOUTH|EAST),[1-2]");
                 nbBoatToMove = Integer.parseInt(choiceBoat.split(",")[0]);
@@ -388,7 +390,7 @@ public class Human implements Player {
                 if (!check) System.out.println("Placement error.\nPlease try again.");
             } while (!check);
             removedBoat = defenseGrid.removeBoat(boatToMove);
-            boatToMove.setPosition(new Case(newRow, newColumn));
+            boatToMove.setPosition(new Square(newRow, newColumn));
             defenseGrid.moveBoat(removedBoat, dirToMove, nbOfMove);
 
         }
@@ -396,6 +398,7 @@ public class Human implements Player {
 
     /**
      * Check if the game is over.
+     *
      * @return True if the user lost. False if not
      */
     @Override
@@ -408,17 +411,20 @@ public class Human implements Player {
     }
 
     /**
-     * Print on the attack grid the Case the user hit.
+     * Print on the attack grid the Square the user hit.
+     *
      * @param target The target.
      */
     @Override
-    public void noticeHit(Case target) {
-        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
+    public void noticeHit(Square target) {
+        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("#");
     }
 
     /**
      * Read a user input.
+     *
      * @param regex The regular expression which control the user input.
+     *
      * @return The valid input the user wrote.
      */
     private String readChoice(String regex) {
@@ -436,10 +442,11 @@ public class Human implements Player {
 
     /**
      * Get all the possible shots.
+     *
      * @return The list of the valid targets.
      */
-    private List<Case> getTargets() {
-        List<Case> targets = new ArrayList<>();
+    private List<Square> getTargets() {
+        List<Square> targets = new ArrayList<>();
         for (int row = 1; row < defenseGrid.getSize(); row++) {
             for (int column = 1; column < defenseGrid.getSize(); column++) {
                 if (defenseGrid.getBoard()[row][column].getBoat() != null) {
@@ -472,12 +479,12 @@ public class Human implements Player {
         int gridSize = attackGrid.getSize();
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
-                System.out.print(column == 10 ? "["+ this.defenseGrid.getBoard()[row][column].getIllustration() +"]" : "["+ this.defenseGrid.getBoard()[row][column].getIllustration() +"]");
+                System.out.print(column == 10 ? "["+ this.defenseGrid.getBoard()[row][column].getSymbol() +"]" : "["+ this.defenseGrid.getBoard()[row][column].getSymbol() +"]");
 
             }
             System.out.print(row == 0 ? " " : "  ");
             for (int column = 0; column < gridSize; column++) {
-                System.out.print(column == 10 ? "["+ this.attackGrid.getBoard()[row][column].getIllustration() +"]" : "["+ this.attackGrid.getBoard()[row][column].getIllustration() +"]");
+                System.out.print(column == 10 ? "["+ this.attackGrid.getBoard()[row][column].getSymbol() +"]" : "["+ this.attackGrid.getBoard()[row][column].getSymbol() +"]");
             }
             System.out.println("");
         }

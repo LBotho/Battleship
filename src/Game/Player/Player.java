@@ -1,7 +1,7 @@
 package Game.Player;
 
 import Game.Boats.Boat;
-import Game.Grid.Case;
+import Game.Grid.Square;
 import Game.utils.Direction;
 
 import java.util.List;
@@ -18,9 +18,9 @@ public interface Player {
     boolean checkBoatPosition(int row, int column, Direction direction, int boatSize);
     boolean checkMoveBoat(int row, int column,Boat boat, Direction dirToMove);
 
-    Case pickTarget();
-    int hit(Case target);
+    Square pickTarget();
+    int hit(Square target);
     void moveBoat();
     boolean lost();
-    void noticeHit(Case target);
+    void noticeHit(Square target);
 }

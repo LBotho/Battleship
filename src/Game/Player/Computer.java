@@ -1,7 +1,7 @@
 package Game.Player;
 
 import Game.Boats.*;
-import Game.Grid.Case;
+import Game.Grid.Square;
 import Game.Grid.Grid;
 import Game.utils.Direction;
 
@@ -34,6 +34,7 @@ public class Computer implements Player {
 
     /**
      * Get the player boats list.
+     *
      * @return The list of the player's boats
      */
     @Override
@@ -59,7 +60,7 @@ public class Computer implements Player {
             } while (!check);
             //Init boat
             boat.setDirection(direction);
-            boat.setPosition(new Case(row,column));
+            boat.setPosition(new Square(row,column));
             defenseGrid.addBoat(boat);
         }
         System.out.println("\n##################################################");
@@ -69,10 +70,12 @@ public class Computer implements Player {
 
     /**
      * Check if the boat position is valid and if there's no overlapse with other boats.
-     * @param row The row the user chose to place the boat start Case.
-     * @param column The row the user chose to place the boat start Case.
+     *
+     * @param row The row the user chose to place the boat start Square.
+     * @param column The row the user chose to place the boat start Square.
      * @param direction The direction of the boat.
      * @param boatSize The size of the boat.
+     *
      * @return True if the boat placement is valid and false if not.
      */
     @Override
@@ -141,28 +144,29 @@ public class Computer implements Player {
 
     /**
      * Computer's target choice.
+     *
      * @return The target the computer chose.
      */
     @Override
-    public Case pickTarget() {
-        List<Case> targets = getTargets();
+    public Square pickTarget() {
+        List<Square> targets = getTargets();
         attackGrid.clearPreviousTarget();
         int index = randomGenerator.nextInt(targets.size());
-        Case targetChoice = targets.get(index);
-        for (Case target: targets) {
+        Square targetChoice = targets.get(index);
+        for (Square target: targets) {
             attackGrid.addTarget(target);
         }
         return targetChoice;
     }
 
     @Override
-    public int hit(Case target) {
+    public int hit(Square target) {
         Boat boat = defenseGrid.getBoard()[target.getRow()][target.getColumn()].getBoat();
         Boolean alreadyHit = defenseGrid.getBoard()[target.getRow()][target.getColumn()].isHasBeenHit();
         if (boat != null && !alreadyHit) {
             boat.damage();
             defenseGrid.getBoard()[target.getRow()][target.getColumn()].setHasBeenHit(true);
-            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("#");
             if (boat.getHealth() == 0) {
                 defenseGrid.removeBoat(boat);
                 System.out.println(boat.getName()+" sank!");
@@ -193,7 +197,7 @@ public class Computer implements Player {
             Boat boatToMove;
             int newRow = 0;
             int newColumn = 0;
-            List<Case> removedBoat;
+            List<Square> removedBoat;
 
             do {
                 nbBoatToMove = randomGenerator.nextInt(nbOfBoat - 0 + 1) + 0;
@@ -224,7 +228,7 @@ public class Computer implements Player {
                 check = checkMoveBoat(newRow,newColumn,boatToMove, dirToMove);
             } while (!check);
             removedBoat = defenseGrid.removeBoat(boatToMove);
-            boatToMove.setPosition(new Case(newRow, newColumn));
+            boatToMove.setPosition(new Square(newRow, newColumn));
             defenseGrid.moveBoat(removedBoat, dirToMove, nbOfMove);
         }
     }
@@ -243,12 +247,12 @@ public class Computer implements Player {
      * @param target The target.
      */
     @Override
-    public void noticeHit(Case target) {
-        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
+    public void noticeHit(Square target) {
+        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("#");
     }
 
-    private List<Case> getTargets() {
-        List<Case> targets = new ArrayList<>();
+    private List<Square> getTargets() {
+        List<Square> targets = new ArrayList<>();
         for (int row = 1; row < defenseGrid.getSize(); row++) {
             for (int column = 1; column < defenseGrid.getSize(); column++) {
                 if (defenseGrid.getBoard()[row][column].getBoat() != null) {

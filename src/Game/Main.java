@@ -12,12 +12,12 @@ import java.util.regex.Pattern;
 public class Main {
     /**
      * Main function
-     * @param args
+     *
+     * @param args Main args
      */
     public static void main(String[] args) {
         Boolean player2Human = player2Choice();
         Game game = new Game(player2Human);
-        // Game initialization
         game.init();
         game.play();
     }

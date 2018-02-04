@@ -1,6 +1,6 @@
 package Game;
 
-import Game.Grid.Case;
+import Game.Grid.Square;
 import Game.Player.Computer;
 import Game.Player.Human;
 import Game.Player.Player;
@@ -15,7 +15,8 @@ public class Game {
     private Player player1, player2;
 
     /**
-     * Game constructor
+     * Creates 2 players: player 1 is human (the user) and player 2 is human or computer according to the user's choice.
+     *
      * @param player2Human The user game mode choice (true: against a human, false: against the computer).
      */
     public Game(Boolean player2Human) {
@@ -24,7 +25,7 @@ public class Game {
     }
 
     /**
-     * Game initialization function (boats placement).
+     * Game initialization function (boats placement for both players).
      */
     public void init () {
         System.out.println("\n##################################################");
@@ -38,7 +39,8 @@ public class Game {
     }
 
     /**
-     * Game loop function.
+     * Game loop function. Each rounds, both players can move a boat (if none of the boats were hit the previous round)
+     * then pick a target to fire. The game ends when 1 of the 2 players no longer has boats alive.
      */
     public void play() {
         int player1Shot=0,player2Shot=0;
@@ -50,7 +52,7 @@ public class Game {
             System.out.println("##################################################\n");
 
             if (player2Shot == 0 && round > 1) player1.moveBoat();
-            Case target1 = player1.pickTarget();
+            Square target1 = player1.pickTarget();
             player1Shot = player2.hit(target1);
             //If player 1 hit player 2 we notice it on the attack grid of player 1
             if(player1Shot == 1) player1.noticeHit(target1);
@@ -68,7 +70,7 @@ public class Game {
             System.out.println("##################################################\n");
             if (player1Shot == 0 && round > 1) player2.moveBoat();
 
-            Case target2 = player2.pickTarget();
+            Square target2 = player2.pickTarget();
             player2Shot = player1.hit(target2);
             if(player1.lost()){
                 System.out.println("\n##################################################");
