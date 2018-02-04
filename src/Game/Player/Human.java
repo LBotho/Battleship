@@ -19,9 +19,9 @@ public class Human implements Player {
     public Human() {
         boatsList.add(new Carrier(5,2));
 //        boatsList.add(new Cruiser(4,2));
-      //  boatsList.add(new Destroyer(3,2));
-      //  boatsList.add(new Submarine(3,4));
-      //  boatsList.add(new Torpedo(2,5));
+//        boatsList.add(new Destroyer(3,2));
+//        boatsList.add(new Submarine(3,4));
+//        boatsList.add(new Torpedo(2,5));
     }
 
     @Override
@@ -217,8 +217,6 @@ public class Human implements Player {
             boatToMove.setPosition(new Case(newRow, newColumn));
             defenseGrid.moveBoat(removedBoat, dirToMove, nbOfMove, boatToMove);
 
-        } else if (choice.equalsIgnoreCase("no")) {
-
         }
     }
 
@@ -228,7 +226,7 @@ public class Human implements Player {
         for(Boat boat : boatsList) {
             totalHealth+=boat.getHealth();
         }
-        return (totalHealth == 0 ? true : false);
+        return (totalHealth == 0);
     }
 
     @Override

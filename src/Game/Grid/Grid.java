@@ -104,7 +104,7 @@ public class Grid {
                 break;
             case WEST:
                 for (int i=0; i<boat.getSize();i++) {
-                    removedBoat.add(new Case(boat.getPosition().getRow(), boat.getPosition().getColumn()-i, board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].getIllustration(), board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].isHasBeenHit(), boat));
+                    removedBoat.add(new Case(boat.getPosition().getRow(), boat.getPosition().getColumn()-i, board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].getIllustration(), board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].isHasBeenHit(), boat));
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setBoat(null);
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setIllustration(" ");
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setHasBeenHit(false);
