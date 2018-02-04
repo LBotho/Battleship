@@ -205,9 +205,9 @@ public class Grid {
                 break;
             case WEST:
                 for (Case c : boatOldPos) {
-                    board[c.getRow()-nbOfMove][c.getColumn()].setIllustration(c.getIllustration());
-                    board[c.getRow()-nbOfMove][c.getColumn()].setHasBeenHit(c.isHasBeenHit());
-                    board[c.getRow()-nbOfMove][c.getColumn()].setBoat(c.getBoat());
+                    board[c.getRow()][c.getColumn()-nbOfMove].setIllustration(c.getIllustration());
+                    board[c.getRow()][c.getColumn()-nbOfMove].setHasBeenHit(c.isHasBeenHit());
+                    board[c.getRow()][c.getColumn()-nbOfMove].setBoat(c.getBoat());
                 }
                 break;
         }
