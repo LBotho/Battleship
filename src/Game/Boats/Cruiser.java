@@ -1,5 +1,10 @@
 package Game.Boats;
 
+/**
+ * Cruiser class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Cruiser extends Boat {
     /**
      * Cruiser constructor.

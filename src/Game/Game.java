@@ -5,12 +5,17 @@ import Game.Player.Computer;
 import Game.Player.Human;
 import Game.Player.Player;
 
+/**
+ * Game class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Game {
     private Player player1, player2;
 
     /**
      * Game constructor
-     * @param player2Human
+     * @param player2Human The user game mode choice (true -> against a human, false -> against the computer).
      */
     public Game(Boolean player2Human) {
         player1 = new Human();
@@ -18,7 +23,7 @@ public class Game {
     }
 
     /**
-     * Game initialization function (boats placement)
+     * Game initialization function (boats placement).
      */
     public void init () {
         System.out.println("\n##################################################");
@@ -32,7 +37,7 @@ public class Game {
     }
 
     /**
-     * Game loop function
+     * Game loop function.
      */
     public void play() {
         int player1Shot=0,player2Shot=0;

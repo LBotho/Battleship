@@ -1,5 +1,10 @@
 package Game.Boats;
 
+/**
+ * Destroyer class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Destroyer extends Boat {
     /**
      * Destroyer constructor.

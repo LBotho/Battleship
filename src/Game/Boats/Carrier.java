@@ -1,5 +1,10 @@
 package Game.Boats;
 
+/**
+ * Carrier class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Carrier extends Boat {
     /**
      * Carrier constructor.

@@ -4,6 +4,12 @@ import Game.Grid.Case;
 
 import java.util.List;
 
+/**
+ * Functions class.
+ * Contains all the "tools" functions we need.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Functions {
     /**
      * Convert char to integer.

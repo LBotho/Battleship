@@ -6,6 +6,11 @@ import Game.utils.Direction;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Grid class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Grid {
     private final int size=11;
     private Case[][] board = new Case[size][size];

@@ -3,6 +3,11 @@ package Game.Boats;
 import Game.Grid.Case;
 import Game.utils.Direction;
 
+/**
+ * Boat class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 abstract public class Boat {
     private Case position;
     private Direction direction;

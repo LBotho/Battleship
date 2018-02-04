@@ -6,6 +6,11 @@ import Game.utils.Direction;
 
 import java.util.List;
 
+/**
+ * Player interface.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public interface Player {
     List<Boat> getBoatsList();
     void placeBoats();

@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Human class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Human implements Player {
     private Grid attackGrid = new Grid();
     private Grid defenseGrid = new Grid();

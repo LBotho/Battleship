@@ -2,6 +2,11 @@ package Game.Grid;
 
 import Game.Boats.Boat;
 
+/**
+ * Case class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Case {
     private int row;
     private int column;

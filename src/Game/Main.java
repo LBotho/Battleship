@@ -3,10 +3,14 @@ package Game;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Main class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Main {
-
     /**
-     * Main function
+     * Main function.
      */
     public static void main(String[] args) {
         Boolean player2Human = player2Choice();
@@ -19,7 +23,7 @@ public class Main {
     /**
      * Let the user choose which game mode he wants to play: against another human or a computer.
      *
-     * @return boolean player2Human
+     * @return True if the user wants to play against a human or False if the user wants to play against the computer.
      */
     private static Boolean player2Choice () {
         System.out.println("#################################################");

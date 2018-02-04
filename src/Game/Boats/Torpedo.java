@@ -1,5 +1,10 @@
 package Game.Boats;
 
+/**
+ * Torpedo class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Torpedo extends Boat {
     /**
      * Torpedo constructor.

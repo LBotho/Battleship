@@ -1,5 +1,10 @@
 package Game.Boats;
 
+/**
+ * Submarine class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Submarine extends Boat {
     /**
      * Submarine constructor.

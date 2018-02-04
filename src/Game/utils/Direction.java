@@ -5,7 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public enum  Direction {
+/**
+ * Direction enum that represents the Cardinal directions.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
+public enum Direction {
     NORTH,
     EAST,
     SOUTH,

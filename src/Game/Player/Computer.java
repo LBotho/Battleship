@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Computer class.
+ *
+ * @author Loïc Bothorel & Paul Michaud
+ */
 public class Computer implements Player {
     private Grid attackGrid = new Grid();
     private Grid defenseGrid = new Grid();
