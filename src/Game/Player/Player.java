@@ -11,7 +11,6 @@ public interface Player {
     void placeBoats();
     boolean checkBoatPosition(int row, int column, Direction direction, int boatSize);
     boolean checkMoveBoat(int row, int column,Boat boat);
-
     Case pickTarget();
     int hit(Case target);
     void moveBoat();

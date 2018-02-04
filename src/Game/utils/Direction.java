@@ -15,6 +15,10 @@ public enum  Direction {
     private static final int SIZE = VALUES.size();
     private static final Random RANDOM = new Random();
 
+    /**
+     * Get a random direction from the Enum.
+     * @return direction
+     */
     public static Direction randomDirection()  {
         return VALUES.get(RANDOM.nextInt(SIZE));
     }

@@ -10,8 +10,9 @@ public class Grid {
     private final int size=11;
     private Case[][] board = new Case[size][size];
 
-    public int getSize() { return size; }
-
+    /**
+     * Grid constructor
+     */
     public Grid() {
        for (int row = 0; row < size; row++) {
            for (int column = 0; column < size; column++) {
@@ -29,6 +30,18 @@ public class Grid {
        }
     }
 
+    /**
+     * Get size.
+     * @return size
+     */
+    public int getSize() { return size; }
+
+    /**
+     * Get board.
+     * @return board
+     */
+    public Case[][] getBoard() { return board; }
+
     public void displayGrid() {
         for (int column = 0; column < size; column++) {
             for (int row = 0; row < size; row++) {
@@ -38,6 +51,10 @@ public class Grid {
         }
     }
 
+    /**
+     * Add a boat on a grid.
+     * @param boat The boat to add on the grid.
+     */
     public void addBoat(Boat boat) {
         switch (boat.getDirection()) {
             case NORTH:
@@ -73,6 +90,11 @@ public class Grid {
         }
     }
 
+    /**
+     * Remove a boat from a grid.
+     * @param boat The boat to remove from the grid.
+     * @return removedBoat
+     */
     public List<Case> removeBoat(Boat boat) {
         List<Case> removedBoat = new ArrayList<>();
         switch (boat.getDirection()) {
@@ -111,17 +133,20 @@ public class Grid {
                 }
                 break;
         }
-
         return removedBoat;
-
     }
 
-    public Case[][] getBoard() { return board; }
-
+    /**
+     * Add target on a grid.
+     * @param target The target to add on the grid.
+     */
     public void addTarget(Case target) {
         if(!board[target.getRow()][target.getColumn()].getIllustration().equals("#")) board[target.getRow()][target.getColumn()].setIllustration("o");
     }
 
+    /**
+     * Remove obsolete targets from a grid.
+     */
     public void clearPreviousTarget() {
         for (int line = 0; line < size; line++) {
             for (int column = 0; column < size; column++) {
@@ -141,8 +166,13 @@ public class Grid {
         }
     }
 
-    public void moveBoat(List<Case> boatOldPos, Direction dirToMove, int nbOfMove,Boat boatToMove) {
-
+    /**
+     * Move a boat on a grid.
+     * @param boatOldPos The boat last position.
+     * @param dirToMove The boat new direction.
+     * @param nbOfMove The boat case number to move.
+     */
+    public void moveBoat(List<Case> boatOldPos, Direction dirToMove, int nbOfMove) {
         //Add the boat, then we'll set his life and illustration for each case (he might have lost life etc, so we need
         //to keep that)
         switch (dirToMove) {
@@ -152,7 +182,6 @@ public class Grid {
                     board[c.getRow()-nbOfMove][c.getColumn()].setHasBeenHit(c.isHasBeenHit());
                     board[c.getRow()-nbOfMove][c.getColumn()].setBoat(c.getBoat());
                 }
-
                 break;
             case EAST:
                 for (Case c : boatOldPos) {
@@ -160,7 +189,6 @@ public class Grid {
                     board[c.getRow()][c.getColumn()+nbOfMove].setHasBeenHit(c.isHasBeenHit());
                     board[c.getRow()][c.getColumn()+nbOfMove].setBoat(c.getBoat());
                 }
-
                 break;
             case SOUTH:
                 for (Case c : boatOldPos) {
@@ -168,7 +196,6 @@ public class Grid {
                     board[c.getRow()+nbOfMove][c.getColumn()].setHasBeenHit(c.isHasBeenHit());
                     board[c.getRow()+nbOfMove][c.getColumn()].setBoat(c.getBoat());
                 }
-
                 break;
             case WEST:
                 for (Case c : boatOldPos) {
@@ -176,7 +203,6 @@ public class Grid {
                     board[c.getRow()-nbOfMove][c.getColumn()].setHasBeenHit(c.isHasBeenHit());
                     board[c.getRow()-nbOfMove][c.getColumn()].setBoat(c.getBoat());
                 }
-
                 break;
         }
     }

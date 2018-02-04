@@ -5,13 +5,22 @@ import java.util.regex.Pattern;
 
 public class Main {
 
+    /**
+     * Main function
+     */
     public static void main(String[] args) {
         Boolean player2Human = player2Choice();
         Game game = new Game(player2Human);
+        // Game initialization
         game.init();
         game.play();
     }
 
+    /**
+     * Let the user choose which game mode he wants to play: against another human or a computer.
+     *
+     * @return boolean player2Human
+     */
     private static Boolean player2Choice () {
         System.out.println("#################################################");
         System.out.println("#                  BATTLESHIP                   #");

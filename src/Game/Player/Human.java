@@ -16,6 +16,9 @@ public class Human implements Player {
     private Grid defenseGrid = new Grid();
     private List<Boat> boatsList = new ArrayList<>();
 
+    /**
+     * Human constructor
+     */
     public Human() {
         boatsList.add(new Carrier(5,2));
 //        boatsList.add(new Cruiser(4,2));
@@ -24,11 +27,19 @@ public class Human implements Player {
 //        boatsList.add(new Torpedo(2,5));
     }
 
+    /**
+     * Get the player boats list.
+     * @return The list of the player's boats
+     */
     @Override
     public List<Boat> getBoatsList() {
         return this.boatsList;
     }
 
+    /**
+     * Boat placement function. Ask the user to write a row (Ex: D), a column (Ex: 2) and a direction (North, East,
+     * South or West). Then check if the placement is valid.
+     */
     @Override
     public void placeBoats() {
         String choice;
@@ -54,6 +65,14 @@ public class Human implements Player {
         }
     }
 
+    /**
+     * Check if the boat position is valid and if there's no overlapse with other boats.
+     * @param row The row the user chose to place the boat start Case.
+     * @param column The row the user chose to place the boat start Case.
+     * @param direction The direction of the boat.
+     * @param boatSize The size of the boat.
+     * @return True if the boat placement is valid and false if not.
+     */
     @Override
     public boolean checkBoatPosition(int row, int column, Direction direction, int boatSize) {
         Boolean check = false;
@@ -122,6 +141,13 @@ public class Human implements Player {
         return check;
     }
 
+    /**
+     *
+     * @param row The row
+     * @param column The column
+     * @param boatToMove The boat to move.
+     * @return
+     */
     @Override
     public boolean checkMoveBoat(int row, int column, Boat boatToMove) {
         Direction direction = boatToMove.getDirection();
@@ -193,6 +219,10 @@ public class Human implements Player {
         return check;
     }
 
+    /**
+     * Ask the user to choose a target.
+     * @return The target the user chose.
+     */
     @Override
     public Case pickTarget() {
         List<Case> targets = getTargets();
@@ -211,6 +241,11 @@ public class Human implements Player {
         return targetChoice;
     }
 
+    /**
+     *
+     * @param target The target
+     * @return 0 if 'miss', 1 if 'hit' or 2 if 'sink'
+     */
     @Override
     public int hit(Case target) {
         Boat boat = defenseGrid.getBoard()[target.getRow()][target.getColumn()].getBoat();
@@ -231,6 +266,9 @@ public class Human implements Player {
         return 0;
     }
 
+    /**
+     * Move boat function.
+     */
     @Override
     public void moveBoat() {
         System.out.println("Do you want to move a boat (yes/no)");
@@ -286,11 +324,15 @@ public class Human implements Player {
             } while (!check);
             removedBoat = defenseGrid.removeBoat(boatToMove);
             boatToMove.setPosition(new Case(newRow, newColumn));
-            defenseGrid.moveBoat(removedBoat, dirToMove, nbOfMove, boatToMove);
+            defenseGrid.moveBoat(removedBoat, dirToMove, nbOfMove);
 
         }
     }
 
+    /**
+     * Check if the game is over.
+     * @return True if the user lost. False if not
+     */
     @Override
     public boolean lost() {
         int totalHealth = 0;
@@ -300,11 +342,20 @@ public class Human implements Player {
         return (totalHealth == 0);
     }
 
+    /**
+     * Print on the attack grid the Case the user hit.
+     * @param target The target.
+     */
     @Override
     public void noticeHit(Case target) {
         this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");
     }
 
+    /**
+     * Read a user input.
+     * @param regex The regular expression which control the user input.
+     * @return The valid input the user wrote.
+     */
     private String readChoice(String regex) {
         Scanner reader = new Scanner(System.in);
         String input = reader.nextLine();
@@ -318,6 +369,10 @@ public class Human implements Player {
         return input;
     }
 
+    /**
+     * Get all the possible shots.
+     * @return The list of the valid targets.
+     */
     private List<Case> getTargets() {
         List<Case> targets = new ArrayList<>();
         for (int row = 1; row < defenseGrid.getSize(); row++) {
@@ -343,6 +398,9 @@ public class Human implements Player {
         return targets;
     }
 
+    /**
+     * Print both the defense grid and the attack grid side by side.
+     */
     private void showBothGrid() {
         //Same for both grid
         System.out.println("           Defense grid                        Attack grid");

@@ -15,6 +15,9 @@ public class Computer implements Player {
     private List<Boat> boatsList = new ArrayList<>();
     private Random randomGenerator = new Random();
 
+    /**
+     * Computer constructor
+     */
     public Computer() {
         boatsList.add(new Carrier(5,2));
 //        boatsList.add(new Cruiser(4,2));
@@ -23,11 +26,18 @@ public class Computer implements Player {
 //        boatsList.add(new Torpedo(2,5));
     }
 
+    /**
+     * Get the player boats list.
+     * @return The list of the player's boats
+     */
     @Override
     public List<Boat> getBoatsList() {
         return this.boatsList;
     }
 
+    /**
+     * Boat placement function
+     */
     @Override
     public void placeBoats() {
         Direction direction;
@@ -51,6 +61,14 @@ public class Computer implements Player {
         System.out.println("##################################################");
     }
 
+    /**
+     * Check if the boat position is valid and if there's no overlapse with other boats.
+     * @param row The row the user chose to place the boat start Case.
+     * @param column The row the user chose to place the boat start Case.
+     * @param direction The direction of the boat.
+     * @param boatSize The size of the boat.
+     * @return True if the boat placement is valid and false if not.
+     */
     @Override
     public boolean checkBoatPosition(int row, int column, Direction direction, int boatSize) {
         Boolean check = false;
@@ -115,6 +133,10 @@ public class Computer implements Player {
         return check;
     }
 
+    /**
+     * Computer's target choice.
+     * @return The target the computer chose.
+     */
     @Override
     public Case pickTarget() {
         List<Case> targets = getTargets();
@@ -161,6 +183,10 @@ public class Computer implements Player {
         return (totalHealth == 0);
     }
 
+    /**
+     *
+     * @param target The target.
+     */
     @Override
     public void noticeHit(Case target) {
         this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setIllustration("#");

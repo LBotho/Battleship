@@ -5,16 +5,21 @@ import Game.Player.Computer;
 import Game.Player.Human;
 import Game.Player.Player;
 
-import java.io.IOException;
-
 public class Game {
     private Player player1, player2;
 
+    /**
+     * Game constructor
+     * @param player2Human
+     */
     public Game(Boolean player2Human) {
         player1 = new Human();
         if (player2Human) player2 = new Human(); else player2 = new Computer();
     }
 
+    /**
+     * Game initialization function (boats placement)
+     */
     public void init () {
         System.out.println("\n##################################################");
         System.out.println("#            PLAYER 1 BOATS PLACEMENT            #");
@@ -26,6 +31,9 @@ public class Game {
         player2.placeBoats();
     }
 
+    /**
+     * Game loop function
+     */
     public void play() {
         int player1Shot=0,player2Shot=0;
         int round = 1;
