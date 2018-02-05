@@ -22,5 +22,5 @@ public interface Player {
     int hit(Square target);
     void moveBoat();
     boolean lost();
-    void noticeHit(Square target);
+    void noticeHit(Square target,int shot);
 }

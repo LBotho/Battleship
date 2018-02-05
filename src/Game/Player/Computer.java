@@ -168,7 +168,7 @@ public class Computer implements Player {
         if (boat != null && !alreadyHit) {
             boat.damage();
             defenseGrid.getBoard()[target.getRow()][target.getColumn()].setHasBeenHit(true);
-            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("#");
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("x");
             if (boat.getHealth() == 0) {
                 defenseGrid.removeBoat(boat);
                 System.out.println(boat.getName()+" sank!");
@@ -255,10 +255,12 @@ public class Computer implements Player {
      * Print the Square the user hit on the attack grid .
      *
      * @param target The target.
+     * @param shot The result of the shot (0: miss, 1: hit or 2: sank)
      */
     @Override
-    public void noticeHit(Square target) {
-        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("#");
+    public void noticeHit(Square target, int shot) {
+        if (shot == 0) this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("o");
+        else if (shot == 1 || shot == 2) this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("x");
     }
 
     /**
@@ -358,7 +360,6 @@ public class Computer implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row - i][column].getBoat() != null && this.defenseGrid.getBoard()[row - i][column].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row - i][column].getBoat().getName() + ".");
                             break;
                         }
                     }
@@ -372,7 +373,6 @@ public class Computer implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row][column + i].getBoat() != null && this.defenseGrid.getBoard()[row][column + i].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row][column + i].getBoat().getName() + ".");
                             break;
                         }
                     }
@@ -386,7 +386,6 @@ public class Computer implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row + i][column].getBoat() != null && this.defenseGrid.getBoard()[row + i][column].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row + i][column].getBoat().getName() + ".");
                             break;
                         }
                     }
@@ -401,7 +400,6 @@ public class Computer implements Player {
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row][column - i].getBoat() != null && this.defenseGrid.getBoard()[row][column - i].getBoat() != boatToMove) {
                             check = false;
-                            System.out.println("There is a boat overlap with your " + this.defenseGrid.getBoard()[row][column - i].getBoat().getName() + ".");
                             break;
                         }
                     }

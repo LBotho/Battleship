@@ -309,7 +309,7 @@ public class Human implements Player {
         if (boat != null && !alreadyHit) {
             boat.damage();
             defenseGrid.getBoard()[target.getRow()][target.getColumn()].setHasBeenHit(true);
-            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("#");
+            defenseGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("x");
             if (boat.getHealth() == 0) {
                 defenseGrid.removeBoat(boat);
                 System.out.println(boat.getName()+" sank!");
@@ -399,13 +399,18 @@ public class Human implements Player {
     }
 
     /**
-     * Print the Square the user hit on the attack grid .
+     * Print the result of the shot on the attack grid.
      *
      * @param target The target.
+     * @param shot The result of the shot (0: miss, 1: hit or 2: sank)
      */
     @Override
-    public void noticeHit(Square target) {
-        this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("#");
+    public void noticeHit(Square target, int shot) {
+        if (shot == 0){
+            this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("o");
+        } else if (shot == 1 || shot == 2) {
+            this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("x");
+        }
     }
 
     /**
@@ -462,13 +467,27 @@ public class Human implements Player {
      * Print both the defense grid and the attack grid side by side.
      */
     private void showBothGrid() {
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("|                        DEFENSE GRID CAPTION                       |");
+        System.out.println("---------------------------------------------------------------------");
+        for (Boat boat: boatsList) {
+            System.out.println("|  "+boatsList.indexOf(boat)+" = "+String.format("%-61s", boat.getName())+"|");
+        }
+        System.out.println("---------------------------------------------------------------------\n");
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("|                        ATTACK GRID CAPTION                        |");
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("|  "+String.format("%-65s", "* = target")+"|");
+        System.out.println("|  "+String.format("%-65s", "x = hit")+"|");
+        System.out.println("|  "+String.format("%-65s", "o = miss")+"|");
+        System.out.println("---------------------------------------------------------------------\n");
+
         //Same for both grid
         System.out.println("           Defense grid                        Attack grid");
         int gridSize = attackGrid.getSize();
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
                 System.out.print(column == 10 ? "["+ this.defenseGrid.getBoard()[row][column].getSymbol() +"]" : "["+ this.defenseGrid.getBoard()[row][column].getSymbol() +"]");
-
             }
             System.out.print(row == 0 ? " " : "  ");
             for (int column = 0; column < gridSize; column++) {

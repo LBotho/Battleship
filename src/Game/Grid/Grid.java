@@ -154,7 +154,9 @@ public class Grid {
      * @param target The target to add on the grid.
      */
     public void addTarget(Square target) {
-        if(!board[target.getRow()][target.getColumn()].getSymbol().equals("#")) board[target.getRow()][target.getColumn()].setSymbol("o");
+        if(!board[target.getRow()][target.getColumn()].getSymbol().equals("x") && !board[target.getRow()][target.getColumn()].getSymbol().equals("o")) {
+            board[target.getRow()][target.getColumn()].setSymbol("*");
+        }
     }
 
     /**
@@ -171,7 +173,7 @@ public class Grid {
                     int letterValue = line + 64;
                     this.board[line][column].setSymbol(Character.toString((char) letterValue));
                 } else {
-                    if(!this.board[line][column].getSymbol().equals("#")) {
+                    if(!this.board[line][column].getSymbol().equals("x") && !this.board[line][column].getSymbol().equals("o")) {
                         this.board[line][column].setSymbol(" ");
                     }
                 }

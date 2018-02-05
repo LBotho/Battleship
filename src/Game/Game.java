@@ -28,13 +28,13 @@ public class Game {
      * Game initialization function (boats placement for both players).
      */
     public void init () {
-        System.out.println("\n##################################################");
-        System.out.println("#            PLAYER 1 BOATS PLACEMENT            #");
-        System.out.println("##################################################");
+        System.out.println("#####################################################################");
+        System.out.println("#                      PLAYER 1 BOATS PLACEMENT                     #");
+        System.out.println("#####################################################################");
         player1.placeBoats();
-        System.out.println("\n##################################################");
-        System.out.println("#            PLAYER 2 BOATS PLACEMENT            #");
-        System.out.println("##################################################");
+        System.out.println("#####################################################################");
+        System.out.println("#                      PLAYER 2 BOATS PLACEMENT                     #");
+        System.out.println("#####################################################################");
         player2.placeBoats();
     }
 
@@ -47,37 +47,36 @@ public class Game {
         int round = 1;
         while (true) {
             //PLAYER 1
-            System.out.println("\n##################################################");
-            System.out.println("#                ROUND "+round+": PLAYER 1               #");
-            System.out.println("##################################################\n");
+            System.out.println("\n#####################################################################");
+            System.out.println("#                          ROUND "+round+": PLAYER 1                        #");
+            System.out.println("#####################################################################\n");
 
             if (player2Shot == 0 && round > 1) player1.moveBoat();
             Square target1 = player1.pickTarget();
             player1Shot = player2.hit(target1);
-            //If player 1 hit player 2 we notice it on the attack grid of player 1
-            if(player1Shot == 1) player1.noticeHit(target1);
+            player1.noticeHit(target1,player1Shot);
 
             if(player2.lost()) {
-                System.out.println("\n##################################################");
-                System.out.println("#                  PLAYER 1 WON                  #");
-                System.out.println("##################################################\n");
+                System.out.println("#####################################################################");
+                System.out.println("#                            PLAYER 1 WON                           #");
+                System.out.println("#####################################################################\n");
                 break;
             }
 
             //PLAYER 2
-            System.out.println("\n##################################################");
-            System.out.println("#                ROUND "+round+": PLAYER 2               #");
-            System.out.println("##################################################\n");
+            System.out.println("\n#####################################################################");
+            System.out.println("#                          ROUND "+round+": PLAYER 2                        #");
+            System.out.println("#####################################################################\n");
             if (player1Shot == 0 && round > 1) player2.moveBoat();
 
             Square target2 = player2.pickTarget();
             player2Shot = player1.hit(target2);
-            if(player2Shot == 1) player2.noticeHit(target2);
+            player2.noticeHit(target2,player2Shot);
 
             if(player1.lost()){
-                System.out.println("\n##################################################");
-                System.out.println("#                  PLAYER 2 WON                  #");
-                System.out.println("##################################################\n");
+                System.out.println("#####################################################################");
+                System.out.println("#                            PLAYER 2 WON                           #");
+                System.out.println("#####################################################################\n");
                 break;
             }
 

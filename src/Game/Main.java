@@ -28,15 +28,15 @@ public class Main {
      * @return True if the user wants to play against a human or False if the user wants to play against the computer.
      */
     private static Boolean player2Choice () {
-        System.out.println("#################################################");
-        System.out.println("#                  BATTLESHIP                   #");
-        System.out.println("#################################################");
-        System.out.println("#             CHOOSE YOUR GAME MODE             #");
-        System.out.println("#################################################");
-        System.out.println("#  1: Play against a human                      #");
-        System.out.println("#  2: Play against a computer                   #");
-        System.out.println("#  3: Quit                                      #");
-        System.out.println("#################################################");
+        System.out.println("#####################################################################");
+        System.out.println("#                            BATTLESHIP+                            #");
+        System.out.println("#####################################################################");
+        System.out.println("#                       CHOOSE YOUR GAME MODE                       #");
+        System.out.println("#####################################################################");
+        System.out.println("#  "+String.format("%-65s", "1: Play against a human")+"#");
+        System.out.println("#  "+String.format("%-65s", "2: Play against a computer")+"#");
+        System.out.println("#  "+String.format("%-65s", "3: Quit")+"#");
+        System.out.println("#####################################################################");
         System.out.println("Your choice :");
 
         Boolean player2Human = false;
