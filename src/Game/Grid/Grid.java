@@ -64,26 +64,26 @@ public class Grid {
      *
      * @param boat The boat to add on the grid.
      */
-    public void addBoat(Boat boat) {
+    public void addBoat(Boat boat, int boatIndex) {
         switch (boat.getDirection()) {
             case NORTH:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setBoat(boat);
-                    board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setSymbol("x");
+                    board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setSymbol(Integer.toString(boatIndex));
                     board[boat.getPosition().getRow()-i][boat.getPosition().getColumn()].setHasBeenHit(false);
                 }
                 break;
             case EAST:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setBoat(boat);
-                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setSymbol("x");
+                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setSymbol(Integer.toString(boatIndex));
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()+i].setHasBeenHit(false);
                 }
                 break;
             case SOUTH:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setBoat(boat);
-                    board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setSymbol("x");
+                    board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setSymbol(Integer.toString(boatIndex));
                     board[boat.getPosition().getRow()+i][boat.getPosition().getColumn()].setHasBeenHit(false);
 
                 }
@@ -91,7 +91,7 @@ public class Grid {
             case WEST:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setBoat(boat);
-                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setSymbol("x");
+                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setSymbol(boat.getName());
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setHasBeenHit(false);
 
                 }

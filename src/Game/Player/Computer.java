@@ -61,7 +61,7 @@ public class Computer implements Player {
             //Init boat
             boat.setDirection(direction);
             boat.setPosition(new Square(row,column));
-            defenseGrid.addBoat(boat);
+            defenseGrid.addBoat(boat, boatsList.indexOf(boat));
         }
         System.out.println("\n##################################################");
         System.out.println("#          PLAYER 2 BOATS PLACEMENT OK           #");

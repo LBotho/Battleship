@@ -64,7 +64,7 @@ public class Human implements Player {
             //Init boat
             boat.setDirection(direction);
             boat.setPosition(new Square(row,column));
-            defenseGrid.addBoat(boat);
+            defenseGrid.addBoat(boat, boatsList.indexOf(boat));
             defenseGrid.displayGrid();
         }
     }
