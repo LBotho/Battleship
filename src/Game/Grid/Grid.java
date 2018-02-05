@@ -63,6 +63,7 @@ public class Grid {
      * Add a boat on a grid.
      *
      * @param boat The boat to add on the grid.
+     * @param boatIndex The index of the boat in the boat list, used to display each boat differently
      */
     public void addBoat(Boat boat, int boatIndex) {
         switch (boat.getDirection()) {
