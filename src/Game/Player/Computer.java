@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Computer class.
+ * Computer class. Manages all the functions for a computer player.
  *
  * @author Loic Bothorel
  * @author Paul Michaud
@@ -21,15 +21,12 @@ public class Computer implements Player {
     private List<Boat> boatsList = new ArrayList<>();
     private Random randomGenerator = new Random();
 
-    /**
-     * Computer constructor
-     */
     public Computer() {
         boatsList.add(new Carrier(5,2));
-//        boatsList.add(new Cruiser(4,2));
-//        boatsList.add(new Destroyer(3,2));
-//        boatsList.add(new Submarine(3,4));
-//        boatsList.add(new Torpedo(2,5));
+        boatsList.add(new Cruiser(4,2));
+        boatsList.add(new Destroyer(3,2));
+        boatsList.add(new Submarine(3,4));
+        boatsList.add(new Torpedo(2,5));
     }
 
     /**
@@ -43,7 +40,7 @@ public class Computer implements Player {
     }
 
     /**
-     * Boat placement function
+     * Boat placement function. The computer places randomly his boats on the grid.
      */
     @Override
     public void placeBoats() {
@@ -63,9 +60,7 @@ public class Computer implements Player {
             boat.setPosition(new Square(row,column));
             defenseGrid.addBoat(boat, boatsList.indexOf(boat));
         }
-        System.out.println("\n##################################################");
-        System.out.println("#          PLAYER 2 BOATS PLACEMENT OK           #");
-        System.out.println("##################################################");
+        System.out.println("\n##########  PLAYER 2 BOATS PLACEMENT OK  #########");
     }
 
     /**
@@ -159,6 +154,13 @@ public class Computer implements Player {
         return targetChoice;
     }
 
+    /**
+     * Check if a shot is missed, hit or sank a boat.
+     *
+     * @param target The target
+     *
+     * @return 0 if 'miss', 1 if 'hit' or 2 if 'sink'
+     */
     @Override
     public int hit(Square target) {
         Boat boat = defenseGrid.getBoard()[target.getRow()][target.getColumn()].getBoat();
@@ -179,12 +181,14 @@ public class Computer implements Player {
         return 0;
     }
 
+    /**
+     * Moves the computer's boat. If he can move, he computer chooses randomly if he moves or not. If yes, he chooses
+     * randomly the direction and the amplitude of the movement.
+     */
     @Override
     public void moveBoat() {
-
         Random random = new Random();
         String choice = (random.nextBoolean() ? "yes" : "no");
-
         if(choice.equalsIgnoreCase("yes")) {
             int i = boatsList.size();
 
@@ -233,6 +237,11 @@ public class Computer implements Player {
         }
     }
 
+    /**
+     * Check if the game is over.
+     *
+     * @return True if the user lost. False if not
+     */
     @Override
     public boolean lost() {
         int totalHealth = 0;
@@ -243,6 +252,7 @@ public class Computer implements Player {
     }
 
     /**
+     * Print the Square the user hit on the attack grid .
      *
      * @param target The target.
      */
@@ -251,6 +261,11 @@ public class Computer implements Player {
         this.attackGrid.getBoard()[target.getRow()][target.getColumn()].setSymbol("#");
     }
 
+    /**
+     * Get all the possible shots.
+     *
+     * @return The list of the valid targets.
+     */
     private List<Square> getTargets() {
         List<Square> targets = new ArrayList<>();
         for (int row = 1; row < defenseGrid.getSize(); row++) {
@@ -276,6 +291,15 @@ public class Computer implements Player {
         return targets;
     }
 
+    /**
+     * Check the the boat position is valid and if there's no overlap with other boats.
+     *
+     * @param row The row
+     * @param column The column
+     * @param boatToMove The boat to move.
+     *
+     * @return True if the move if valid, false if not.
+     */
     @Override
     public boolean checkMoveBoat(int row, int column, Boat boatToMove, Direction dirToMove) {
         int boatSize  = boatToMove.getSize();
@@ -291,9 +315,7 @@ public class Computer implements Player {
                     check = false;
                     break;
                 }
-
                 break;
-
             case EAST:
                 if (column > 10) {
                     check = false;
@@ -303,7 +325,6 @@ public class Computer implements Player {
                     check = false;
                     break;
                 }
-
                 break;
             case SOUTH:
                 if (row > 10) {
@@ -314,9 +335,6 @@ public class Computer implements Player {
                     check = false;
                     break;
                 }
-
-
-
                 break;
             case WEST:
                 if (column < 1) {
@@ -333,7 +351,6 @@ public class Computer implements Player {
             switch (boatDir) {
                 case NORTH:
                     if (row - boatSize >= 0) {
-
                     } else {
                         check = false;
                         break;
@@ -348,7 +365,6 @@ public class Computer implements Player {
                     break;
                 case EAST:
                     if (column + boatSize <= 11) {
-
                     } else {
                         check = false;
                         break;
@@ -363,12 +379,10 @@ public class Computer implements Player {
                     break;
                 case SOUTH:
                     if (row + boatSize <= 11) {
-
                     } else {
                         check = false;
                         break;
                     }
-
                     for (int i = 0; i < boatSize; i++) {
                         if (this.defenseGrid.getBoard()[row + i][column].getBoat() != null && this.defenseGrid.getBoard()[row + i][column].getBoat() != boatToMove) {
                             check = false;
@@ -394,11 +408,6 @@ public class Computer implements Player {
                     break;
             }
         }
-
-
         return check;
     }
-
-
-
 }
