@@ -12,7 +12,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- * Human class.
+ * Human class. Manages all the functions for a human player.
  *
  * @author Loic Bothorel
  * @author Paul Michaud
@@ -61,7 +61,6 @@ public class Human implements Player {
                 check = checkBoatPosition(row,column,direction,boat.getSize());
                 if (!check) System.out.println("Placement error.\nPlease try again.");
             } while (!check);
-            //Init boat
             boat.setDirection(direction);
             boat.setPosition(new Square(row,column));
             defenseGrid.addBoat(boat);
@@ -129,12 +128,6 @@ public class Human implements Player {
                 }
                 break;
             case WEST:
-                System.out.println("WEST");
-
-                System.out.println(column);
-                System.out.println(boatSize);
-
-
                 if (column-boatSize >= 0) {
                     check = true;
                 } else {
@@ -154,6 +147,8 @@ public class Human implements Player {
     }
 
     /**
+     * Check the the boat position (user input) is valid and if there's no overlap with other boats. Used when the
+     * player wants to move a boat at the beginning of a round.
      *
      * @param row The row
      * @param column The column
@@ -176,7 +171,6 @@ public class Human implements Player {
                     check = false;
                     break;
                 }
-
                 break;
 
             case EAST:
@@ -188,7 +182,6 @@ public class Human implements Player {
                     check = false;
                     break;
                 }
-
                 break;
             case SOUTH:
                 if (row > 10) {
@@ -199,9 +192,6 @@ public class Human implements Player {
                     check = false;
                     break;
                 }
-
-
-
                 break;
             case WEST:
                 if (column < 1) {
@@ -279,8 +269,6 @@ public class Human implements Player {
                     break;
             }
         }
-
-
         return check;
     }
 
@@ -308,8 +296,10 @@ public class Human implements Player {
     }
 
     /**
+     * Check if a shot is missed, hit or sank a boat.
      *
      * @param target The target
+     *
      * @return 0 if 'miss', 1 if 'hit' or 2 if 'sink'
      */
     @Override
@@ -333,7 +323,8 @@ public class Human implements Player {
     }
 
     /**
-     * Move boat function.
+     * If he can and if he wants, the function asks the user which boat the user wants to move then moves it if the
+     * position he wrote is valid.
      */
     @Override
     public void moveBoat() {
@@ -342,7 +333,6 @@ public class Human implements Player {
         if(choice.equalsIgnoreCase("yes")) {
             showBothGrid();
             int i =0;
-
             for (Boat boat : boatsList) {
                 System.out.println(i+". "+boat.getName());
                 i++;
@@ -385,14 +375,12 @@ public class Human implements Player {
                         newColumn = boatToMove.getPosition().getColumn()+nbOfMove;
                         break;
                 }
-
                 check = checkMoveBoat(newRow,newColumn,boatToMove, dirToMove);
                 if (!check) System.out.println("Placement error.\nPlease try again.");
             } while (!check);
             removedBoat = defenseGrid.removeBoat(boatToMove);
             boatToMove.setPosition(new Square(newRow, newColumn));
             defenseGrid.moveBoat(removedBoat, dirToMove, nbOfMove);
-
         }
     }
 
@@ -411,7 +399,7 @@ public class Human implements Player {
     }
 
     /**
-     * Print on the attack grid the Square the user hit.
+     * Print the Square the user hit on the attack grid .
      *
      * @param target The target.
      */
