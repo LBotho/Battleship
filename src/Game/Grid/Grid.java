@@ -91,7 +91,7 @@ public class Grid {
             case WEST:
                 for (int i=0; i<boat.getSize();i++) {
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setBoat(boat);
-                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setSymbol(boat.getName());
+                    board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setSymbol(Integer.toString(boatIndex));
                     board[boat.getPosition().getRow()][boat.getPosition().getColumn()-i].setHasBeenHit(false);
 
                 }
