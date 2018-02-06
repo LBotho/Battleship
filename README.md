@@ -11,3 +11,5 @@
 - [x] Après un tir raté, l'adversaire a le droit de déplacer un bateau jusqu'à deux positions.
 - [x] Un bateau touché plus que deux fois est détruit.
 - [x] Toutes les entrées invalides lors de la saisie utilisateur mènent à un message d'erreur et invite l'utilisateur à réessayer.
+
+![Diagramme des classes](img/classdiagram.png?raw=true "Diagramme des classes")
