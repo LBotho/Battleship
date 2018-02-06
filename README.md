@@ -12,4 +12,4 @@
 - [x] Un bateau touché plus que deux fois est détruit.
 - [x] Toutes les entrées invalides lors de la saisie utilisateur mènent à un message d'erreur et invite l'utilisateur à réessayer.
 
-![Diagramme des classes](img/classdiagram.png?raw=true "Diagramme des classes")
+![Diagramme des classes](Class Diagram.png?raw=true "Diagramme des classes")
